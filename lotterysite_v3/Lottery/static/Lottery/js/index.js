@@ -19,6 +19,7 @@ var chatID=0;
 var isStillThisIssue=false;//是否还是这一期
 var isAlreadyTZ=false;
 var XIANZAIstatus=-1;//0代表可以投注1代表倒计时-1初始化
+var OutIssueNo=0;//中断前的期号
 
 var fanhui01=new Object();
 var mobileBet=[];
@@ -39,7 +40,7 @@ function getScreen(){
             }
         }
     });
-
+    
     if(screen<=768){
         isPC=false;
         if(screen<400){
@@ -47,6 +48,12 @@ function getScreen(){
             document.getElementById("ip_head_prere02").style.marginTop="-2px";
             document.getElementById("ip_now_status").style.fontSize="0.9em";
         }
+    }
+    if(sessionStorage.number1||sessionStorage.number2){
+        if(whichGame==1)
+            OutIssueNo=sessionStorage.number1;
+        else
+            OutIssueNo=sessionStorage.number2;
     }
     if(!sessionStorage.chatid1){getAnn(1);getAnn(2);}
     
@@ -59,14 +66,14 @@ function cana28(){
         $("#gm_button2").toggleClass("btn-warning",true);
         $("#gm_button1").toggleClass("btn-warning",false);
         gameInit();
-        chatroomInit();
+        //chatroomInit();
         touzhu(-1);
         whichGame=2;
         sessionStorage.whichgame=whichGame;
         getWebInfo(whichGame);    
     }else{
         gameInit();
-        chatroomInit();
+        //chatroomInit();
         whichGame=2;
         sessionStorage.whichgame=whichGame;
         getWebInfo(whichGame);
@@ -580,23 +587,23 @@ function getWebInfo(whichgame){
                         document.getElementById('g_t_ltime').innerHTML=can;
                         document.getElementById('should_submit').removeAttribute('disabled');
                     }
-                    if(can<60){
-                        if(whichGame==1){
-                            //console.log(sessionStorage.status1);
-                            if(sessionStorage.status1==1||sessionStorage.status1==null){
-                                sessionStorage.status1=2;
-                                showSysMessage("系统消息","-----距离封盘还有60秒-----抓紧时间下注-----");
-                                gundongdi();        
-                            }
-                        }else{
-                            //console.log(sessionStorage.status2);
-                            if(sessionStorage.status2==1||sessionStorage.status2==null){
-                                sessionStorage.status2=2;
-                                showSysMessage("系统消息","-----距离封盘还有60秒-----抓紧时间下注-----");
-                                gundongdi();
-                            }
-                        }
-                    }
+//                    if(can<60){
+//                        if(whichGame==1){
+//                            //console.log(sessionStorage.status1);
+//                            if(sessionStorage.status1==1||sessionStorage.status1==null){
+//                                sessionStorage.status1=2;
+//                                showSysMessage("系统消息","-----距离封盘还有60秒-----抓紧时间下注-----");
+//                                gundongdi();        
+//                            }
+//                        }else{
+//                            //console.log(sessionStorage.status2);
+//                            if(sessionStorage.status2==1||sessionStorage.status2==null){
+//                                sessionStorage.status2=2;
+//                                showSysMessage("系统消息","-----距离封盘还有60秒-----抓紧时间下注-----");
+//                                gundongdi();
+//                            }
+//                        }
+//                    }
                     //启动定时器
                     clearTheTime();
                     ding1=setInterval('canTime()',1000);
@@ -608,10 +615,10 @@ function getWebInfo(whichgame){
                     
                     if(whichGame==1){                           
                         if(sessionStorage.status1==1||sessionStorage.status1==2||sessionStorage.status1==null){
-                                sessionStorage.status1=3;
+                            sessionStorage.status1=3;
                             sessionStorage.number1=gameIssueNo;
-                                showSysMessage("系统消息","---------------------封盘停止下注等待开奖---------------------");
-                                gundongdi();        
+                            showSysMessage("系统消息","---------------------封盘停止下注等待开奖---------------------");
+                            gundongdi();        
                         }
                     }else{
                         if(sessionStorage.status2==1||sessionStorage.status2==2||sessionStorage.status2==null){
@@ -725,7 +732,8 @@ function clearTheTime(){
 
 //显示上局盈亏
 function getfyingkui(){
-    var mobileIssueNo=gameIssueNo;//此时是当前期
+    //var mobileIssueNo=gameIssueNo;//此时是当前期
+    var mobileIssueNo=OutIssueNo;
     if(mobileIssueNo==888888){return;}
     var mobileIssueNo1=parseInt(mobileIssueNo-1,10);//上一期的期号
       $.get('/getcurwl/',{"gameid":GAMEID,"issueNO":mobileIssueNo1},function(data1,status){
@@ -914,6 +922,8 @@ function mmajax(nowIssueNum){
            if(s==1){
                //window.location.reload();
                //window.location.href=location;
+               ///////////////////////////////////////////////////////////////////////////////
+               if(isPC){touzhuPopup(-1);touzhu(-1);}
                gameInit();
                getWebInfo(whichGame);
                if(isLogin){getWhoAndMoney();}
@@ -936,16 +946,15 @@ function getChat(){
            if(data.msglist==null){
                return;
            }
-           
            //解析传过来的数据 然后调用formatUserName(xx)将用户名格式化
            //console.log(data);
            var ox=data.msglist;
            for(var i=ox.length-1;i>=0;i--){
                 cname=ox[i][0];
-               //console.log("here do")
-                if(cname!=USER&&USER!=""){
-                    //console.log("here also do");
-                    if(ox[i][1]>chatID){chatID=ox[i][1];}
+                if(ox[i][1]>chatID){chatID=ox[i][1];}
+               //&&USER!=""
+                if(cname!=USER){
+                    console.log("here also do");    
                     ccontent=ox[i][2];
                     //ccontent="大单:320;特码00:100;特码20:11;"
                     ccontent=ccontent.replace(/;/g," ");
