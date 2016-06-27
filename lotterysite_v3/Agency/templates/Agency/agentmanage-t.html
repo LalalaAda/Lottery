@@ -1,0 +1,206 @@
+    {% extends 'Agency/base.html' %}
+    {% load staticfiles %}
+            
+     {% block content %}
+          <div class="graphs">
+                <div id="daili">
+                    <ul>
+                        <li> <img src="{% static 'Agency/images/t01.png' %}" width="24" height="24" alt=""/>
+                            <input name="" type="button"  value="添加代理" onclick="show2()">
+                        </li>
+                        <li>
+                            <select>
+                                <option value="1">所属代理ID</option>
+                                <option value="2">所属代理帐号</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="text" id="dailiinput">
+                        </li>
+                        <li>
+                            <select>
+                                <option value="1">代理ID</option>
+                                <option value="2">代理帐号</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="text" id="dailiinput">
+                        </li>
+                        <li>
+                            <select>
+                                <option value="1">可用</option>
+                                <option value="2">-帐号状态-</option>
+                                <option value="3">可用</option>
+                                <option value="4">冻结</option>
+                            </select>
+                        </li>
+                        <li>统计
+                            <input type="checkbox">
+                        </li>
+                        <li>
+                            <input type="submit" value="查询">
+                        </li>
+                    </ul>
+                </div>
+             <div class="modal fade" id="adduserAndagent" tabindex="1" role="dialog" aria-labelledby="adduserAndagent">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4>添加代理</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" id="adduseragent-form" role="form">
+                                    <div class="form-group">
+                                        <label for="aum-username" class="col-sm-2 control-label">用户名</label>
+                                        <div class="col-sm-9">
+                                            <input  type="text" class="form-control1" id="aua-username" maxlength="30">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="aua-password" class="col-sm-2 control-label">密码</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control1" id="aua-password" maxlength="30">
+                                        </div>
+                                    </div>
+<!--
+                                    <div class="form-group">
+                                        <label for="aua-agcode" class="col-sm-2 control-label">推荐人</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control1" id="aua-agcode" maxlength="30">
+                                        </div>
+                                    </div>
+-->
+                                    <div class="form-group">
+                                        <label for="aua-agentbonus" class="col-sm-2 control-label">占成</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control1" id="aua-agentbonus">
+                                        </div>
+                                    </div>
+                                    <div class="alert hide addagent-tips" role="alert"> </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-sm-11 text-center">
+                                    <button type="button" class="btn btn-default btn-lg addagent-btn">添加</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="dailibiao1">
+                    <div class="col-xs-12 col-sm-12 col-md-12 table-responsive" >
+                        <table class="table table-striped table-hover" id="dailibiao" border="0">
+                            <caption>
+                            单位：金币
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox"></th>
+                                    <th>序号</th>
+                                    <th>代理帐号</th>
+                                    <th>代理ID</th>
+                                    <th>代理编码</th>
+                                    <th>占成</th>
+                                    <th>总上分</th>
+                                    <th>总下分</th>
+                                    <th>当前余额</th>
+                                    <th>直属代理</th>
+                                    <th>直属会员</th>
+                                    <th>所属代理</th>
+                                    <th>上下分权限</th>
+                                    <th>添加时间</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 {% for item in aglist %}
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ item.userid.username }}</td>
+                                        <td> {{ item.userid.id }} </td>
+                                        <td>{{ item.agentcode }}</td>
+                                        <td>{{ item.ratio}}</td>
+                                        <td>{{ item.chargemount }}</td>
+                                        <td>{{ item.exchange }}</td>
+                                        <td>{{ member.money }}</td>
+                                        <td>-</td>
+                                        <td>-</td>
+                                        <td>{{ myagent.agentcode }}</td>
+                                        <td>{% if moneyprivilege %}
+                                            有
+                                            {% else %}
+                                            无
+                                            {% endif %}
+                                        </td>
+                                        <td>{{item.takeupdate}}</td>
+                                        <td>{% if item.userid.is_active %}
+                                            正常
+                                            {% else %}
+                                            冻结
+                                            {% endif %}
+                                        </td>
+                                        <td><select id="sel-{{item.userid.username}}">
+                                               <option value="1">可用</option>
+                                               <option value="2">冻结</option>
+                                            </select>
+                                            <button type="button" class="btn btn-primary btn-sm btn-alertagent" id="{{item.userid.username}}">修改</button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                        </table>
+      
+                        <!--  分页
+                            <div id="huiyuanfenye">
+                                <div>共<span>XX</span>页. 当前第<span>XXX</span>页.</div>
+                                <ul class="pagination">
+                                    <li><a href="#">&laquo;</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">&raquo;</a></li>
+                                </ul>
+                            </div>    --> 
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 代理状态修改 modal -->
+            <div class="modal fade" id="modal-modifyagent" tabindex="1" role="dialog" aria-labelledby="modifyagent">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">代理状态修改</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-sm-8 col-sm-offset-2">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="agstauts" id="agstatus-freeze" value="option2">
+                                            冻结 </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="agstauts" id="agstatus-live" value="option3">
+                                            正常 </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-agsatus-save">保存</button>
+                            <button type="button" class="btn btn-default btn-agsatus-cancel" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% endblock %}
+    {% block bottomjsAndcss %} 
+	<script src="{% static 'Agency/js/ajaxfordjango.js' %}"></script> 
+    <script src="{% static 'Agency/js/memberAndagent.js' %}"></script> 
+{% endblock %}

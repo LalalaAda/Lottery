@@ -1,0 +1,320 @@
+{% extends 'Agency/base.html' %}
+{% load staticfiles %}
+
+{% block customjsAndcss %}
+<style>
+    .lb-checkinfo {
+        padding:8px;
+        margin-bottom: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="graphs">
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#huiyuanfen" data-toggle="tab">会员上下分</a></li>
+        <li><a href="#dailifen" data-toggle="tab">代理上下分</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content"> 
+        <!--会员框-->
+        <div class="tab-pane fade in active" id="huiyuanfen">
+            <table border="0">
+                <tbody>
+                    <tr>
+                        <td >会员ID ：</td>
+                        <td>
+                            <input type="text" id="memberacount">
+                            <button type="button" class="btn btn-sm btn-checkmember">验证</button>
+                            <span class="alert alert-danger alert-sm lb-checkmemberinfo hide">验证提示信息</span>
+                        </td>
+                    </tr>
+                    <tr>
+                         <td> 
+                             <span class="label label-primary">会员帐号</span>
+                         </td>
+                         <td> 
+                             <span class="sp-membername label label-default">--</span>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="label label-primary">会员ID </span>
+                        </td>
+                        <td>
+                            <span class="sp-memberid label label-default">--</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="label label-primary">金 币</span>
+                        </td>
+                        <td>
+                            <span class="sp-membermoney label label-default">--</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="label label-primary" id="sel-charge-member">
+                                <option value="1">上分</option>
+                                <option value="2">下分</option>
+                            </select>
+                        </td>
+                        <td><input id="member-charge-mount" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-charge-member" style="margin-left:130px;">确定</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            会员 {{ usermember.username }} 总上分 ： <span class="huiyuanfenzi2">--</span> 总下分 : <span class="huiyuanfenzi2">--</span>
+            <hr/>
+        </div>
+        <!--会员框  end--> 
+        <!--代理框-->
+        <div class="tab-pane fade" id="dailifen">
+            <table border="0">
+                <tbody>
+                    <tr>
+                        <td >代理ID ：</td>
+                        <td ><input type="text" id="agentacount">
+                            <button type="button" class="btn btn-sm btn-checkagent">验证</button>
+                            <span class="alert alert-danger alert-sm lb-checkagentinfo hide">验证提示信息</span>
+                        </td>
+                    </tr>
+                       <tr>
+                         <td> 
+                             <span class="label label-warning">代理帐号</span>
+                         </td>
+                         <td> 
+                             <span class="sp-agentname label label-default">--</span>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-warning">代理ID </span></td>
+                        <td><span class="sp-agentid label label-default">--</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="label label-warning">金 币</span></td>
+                        <td><span class="sp-agentmoney label label-default">--</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="label label-warning" id="sel-charge-agent">
+                                <option value="1">上分</option>
+                                <option value="2">下分</option>
+                            </select>
+                        </td>
+                        <td><input type="text" id="agent-charge-mount"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button type="button" class="btn btn-primary btn-charge-agent" style="margin-left:130px;">确定</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+            代理 {{useragent.username}}, 总上分 ： <span class="huiyuanfenzi2" id="ag-charge-mount">--</span> 总下分 : <span class="huiyuanfenzi2" id="ag-exchange-mount">--</span>
+            <hr/>
+        </div>
+        <!--会员框 end-->  
+    </div>
+</div>
+{% endblock %}
+
+{% block bottomjsAndcss %} 
+
+<script src="{% static 'Agency/js/ajaxfordjango.js' %}"></script>
+
+<script>
+    $(".btn-checkmember").click(function(){
+        $(".lb-checkmemberinfo").addClass("hide");
+        userid = $("#memberacount").val();
+        
+        $.get('/for28cqadmin/getuserinfo/',{'userid':userid,'type':0},function(data,status){
+            if (status == 'success') {
+                if(data.result == 1) {
+                    $(".sp-membername").text(data.username);
+                    $(".sp-membermoney").text(data.money);
+                    $(".sp-memberid").text(data.userid);
+                    $(".lb-checkmemberinfo").addClass("hide");
+                    $(".lb-checkmemberinfo").attr('id',data.username);
+                }
+                else {
+                    $(".lb-checkmemberinfo").text(data.msg);
+                    $(".lb-checkmemberinfo").removeClass('hide');
+                    
+                    $(".sp-membername").text(' - ');
+                    $(".sp-membermoney").text(' - ');
+                    $(".sp-memberid").text(' - ');
+                }
+            }
+            else {
+                $(".lb-checkmemberinfo").text('查询失败');
+                $(".lb-checkmemberinfo").removeClass('hide');
+                
+                $(".sp-membername").text(' - ');
+                $(".sp-membermoney").text(' - ');
+                $(".sp-memberid").text(' - ');
+            }
+        });
+    });
+    $(".btn-checkagent").click(function(){
+        $(".lb-checkagentinfo").addClass("hide");
+        userid = $("#agentacount").val();
+        
+        $.get('/for28cqadmin/getuserinfo/',{'userid':userid,'type':1},function(data,status){
+            if (status == 'success') {
+                if(data.result == 1) {
+                    $(".sp-agentname").text(data.username);
+                    $(".sp-agentmoney").text(data.money);
+                    $(".sp-agentid").text(data.userid);
+                    
+                    $(".lb-checkagentinfo").addClass("hide");
+                    $(".lb-checkagentinfo").attr('id',data.username);
+                }
+                else {
+                    $(".lb-checkagentinfo").text(data.msg);
+                    $(".lb-checkagentinfo").removeClass('hide');
+                    
+                    $(".sp-agentname").text(' - ');
+                    $(".sp-agentmoney").text(' - ');
+                    $(".sp-agentid").text(' - ');
+                }
+            }
+            else {
+                $(".lb-checkagentinfo").text('查询失败');
+                $(".lb-checkagentinfo").removeClass('hide');
+            }
+        });
+    });
+    $(".btn-charge-member").click(function(){
+        var sel = document.getElementById("sel-charge-member");
+        var selIndex = sel.selectedIndex;
+        var selValue = sel.options[selIndex].value;     //1.上分 2.下分
+        
+        var chargemount = parseInt($("#member-charge-mount").val());
+        
+        if (chargemount <=0)    {
+            alert('请输入大于0的数字');
+            return false;
+        }
+                    
+        username = $(".lb-checkmemberinfo").attr('id');
+        if(typeof(username) == "undefined") {
+            alert("请先输入玩家ID验证,再上下分");
+            return false;
+        }
+        else {
+            var tp;
+            if(selValue == 1)   {
+                tp = '上分';
+            }
+            else if(selValue == 2) {
+                tp = '下分';
+            }
+            else {
+                return false;
+            }
+            msg = '确定要给玩家：' + username + tp + chargemount ;
+            if(confirm(msg))    {
+                var csrftoken = getCookie('csrftoken');
+                $.ajaxSetup({beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+                $.post('/for28cqadmin/membercharge/',{'username':username,'chargemount':chargemount,'type':selValue},function(data,status){
+                    if(status == 'success') {
+                        if(data.result == 1)    {
+                            $(".lb-checkmemberinfo").removeAttr('id');
+                            $("#member-charge-mount").text(' - ');
+                            $(".sp-membername").text(' - ');
+                            $(".sp-memberid").text(' - ');
+                            $(".sp-membermoney").text(' - ');
+                            
+                            if (data.optype == 1) {
+                                alert('上分成功');
+                            }
+                            else if(data.optype == 2) {
+                                alert('下分成功');
+                            }
+                            console.log('-------------------');                            
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+                    }
+                    else {
+                        alert('服务器繁忙,请稍候再试!');
+                    }
+                });
+                
+            }
+        }
+    });
+    
+    $(".btn-charge-agent").click(function(){
+        var sel = document.getElementById("sel-charge-agent");
+        var selIndex = sel.selectedIndex;
+        var selValue = sel.options[selIndex].value;
+        
+        var chargemount = $("#agent-charge-mount").val();
+        username = $(".lb-checkagentinfo").attr('id');
+        if (typeof(username) == 'undefined') {
+            alert('请输入代理的ID验证后再上下分');
+            return false;
+        }
+        else {
+            var tp;
+            if(selValue == 1) {
+                tp='上分';
+            }
+            else if(selValue == 2) {
+                tp='下分';
+            }
+            else {
+                return false;
+            }
+            msg = '确定要给代理：' + username + tp + ' ' + chargemount;
+            if(confirm(msg)) {
+                var csrftoken = getCookie('csrftoken');
+                $.ajaxSetup({beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+                $.post('/for28cqadmin/agentcharge/',{'username':username,'chargemount':chargemount,'type':selValue},function(data,status){
+                    if(status == 'success') {
+                        if (data.result == 1){
+                            if (data.optype == 1) {
+                                alert('上分成功');
+                            }
+                            else if(data.optype == 2) {
+                                alert('下分成功');
+                            }
+                            
+                            $(".lb-checkagentinfo").removeAttr('id');
+                        }
+                        else {
+                            alert(data.msg);
+                        }
+                    }
+                    else {
+                        alert('服务器繁忙,请稍候再试!');
+                    }
+                });
+            }
+        }
+    });
+    
+</script> 
+{% endblock %} 

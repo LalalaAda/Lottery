@@ -1,0 +1,978 @@
+{% extends 'Lottery/base.html' %}
+{% load staticfiles %}
+
+{% block customsytle %}     <!-- 中间添加样式连接 <link> -->
+    <link href="{% static 'Lottery/css/index.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block game %}        <!-- 中间添加内容 -->
+    <!-- 游戏内容 by tu-->
+        <div id="game_Menu" class="game_menu">
+            <button type="button" id="gm_button1" class="btn btn-warning game_menu_btn" onclick="">快乐28</button>
+            <button type="button" id="gm_button2" class="btn game_menu_btn" onclick="">加拿大28</button>
+        </div>
+        <div id="this_game_box" >
+            <!--顶部 0手机 1PC端-->
+            <div id="top_in_phone">
+                <div class="row">
+                    <div class="col-md-8 col-xs-9 col-sm-9 ip_head_div_left">
+                        <div class="row head_row">
+                            <p class="head_p1">第<strong id="ip_nowNum">888888</strong>期</p>
+                            <p id="ip_now_status" class="head_p2">截止投注时间：</p>
+                        </div>
+                        <div class="row head_row tenshow_row">
+                            <p class="head_p3">近十期：</p>
+                            <span id="numinphone0" class="ip_tenNum">78</span>
+                            <span id="numinphone1" class="ip_tenNum">78</span>
+                            <span id="numinphone2" class="ip_tenNum">78</span>
+                            <span id="numinphone3" class="ip_tenNum">78</span>
+                            <span id="numinphone4" class="ip_tenNum">78</span>
+                            <span id="numinphone5" class="ip_tenNum">78</span>
+                            <span id="numinphone6" class="ip_tenNum">78</span>
+                            <span id="numinphone7" class="ip_tenNum">78</span>
+                            <span id="numinphone8" class="ip_tenNum">78</span>
+                            <span id="numinphone9" class="ip_tenNum">78</span>
+                            <p class="head_add_p3">上一期详情：</p>
+                            <span class="head_add_sp">
+                                <span id="ip_head_preresult" class="ip_tenNum ip_lastone">9+9+17=</span>
+                                <span id="ip_head_prere02" class="badge head_add_sp2">28</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-3 col-sm-3 ip_head_div_right">
+                        <p id="g_t_ltime"class="head_p4">5</p>
+                    </div>
+                </div>    
+            </div>
+            <div id="top_in_pc">
+                <table class="pc_head_tab" >
+                    <td class="head_td_left">
+                        <p class="head_tf_p1">第 <strong id="pc_nowNum" class="head_tf_st1" >888823</strong>
+                            期</p>
+                        <p id="pc_now_status" class="head_tf_p2">离截止投注结束时间：</p>
+                        <p id="pc_head_time" class="label label-primary pcheadtime">5</p>
+                        <p class="thispb">秒</p>
+                    </td>
+                    <!--<td class="g_box_top_tda"></td>-->
+                    <td class="g_box_top_tdb">
+                        <p class="gbttdb_p1" >
+                            第 <strong id="pc_head_prenum" >888822</strong>
+                            期开奖结果：
+                            <span class="gb_total_sp">
+                            <span id="pc_head_preresult" class="label label-warning gb_total_sp01">6 + 8 + 6 = </span>
+                            <span id="pc_head_prere02" class="badge gbttdn_p1_sp">20</span>
+                            </span>
+                            
+                            
+                            <a href="http://chart.cp.360.cn/kaijiang/kl8" target="_blank" class="pc_official_inquiry">[官方查询]</a>
+                        </p>
+                        <p class="gbttdb_p2" >
+                            最近十期：
+                            <span id="numinpc0" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc1" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc2" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc3" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc4" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc5" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc6" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc7" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc8" class="badge gbttdb_p2_sp">88</span>
+                            <span id="numinpc9" class="badge gbttdb_p2_sp">88</span>
+                        </p>
+                    </td>
+                    <!--<td class="g_box_top_tdc">
+                        <p>今日战绩│盈亏：<strong id="pc_yingkui">---</strong></p>
+                        <p class="g_box_top_tdcp2">参与 : <strong id="pc_canyuCount">--</strong>
+                            &nbsp;期</p>
+                    </td>-->
+                    <!--<td class="g_box_top_tdc">
+                        <p class="tdc_p1">ID：<strong id="pc_userid_st">---</strong></p>
+                    </td>-->
+                    
+                </table>
+            </div>
+            <!-- 中部开奖 -->
+            <div id="pc_lottery_box" class="pc_lottery_box_div" >
+                <table id="pc_lottery_box_ta" class="pc_lottery_box_ta">
+                    <tr>
+                        <td class="g_in_t"><h6>期号</h6></td>
+                        <td class="g_in_t"><h6>开奖时间</h6></td>
+                        <td class="g_in_t"><h6>开奖结果</h6></td>
+                        <td class="g_in_t"><h6>我的投注</h6></td>
+                        <td class="g_in_t"><h6>投注</h6></td>
+                    </tr>
+                    <tr class="p_lo_b_tr">
+                        <td class="g_in_t"><h5 id="g_qihao_3" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time3" class="kjboxta_h5a">03-18 14:25</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span id="g_result301" class="label label-primary">- - -</span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult301" class="kjboxta_h5b">0</h5>
+                            <h5 id="g_myresult302" class="kjboxta_h5c">/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <button id="g_start_btn3" onclick="touzhu(3)" class="kjboxta_btn" >投注</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="g_in_t"><h5 id="g_qihao_4" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time4" class="kjboxta_h5a">03-18 14:35</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span class="kj_box_total_1sp">
+                                <span id="g_result401" class="label label-primary">- - -</span>
+                                <span id="g_result401_2" class="badge gbttdn_p1_sp">20</span>
+                                </span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult401" class="kjboxta_h5b" >0</h5>
+                            <h5 id="g_myresult402" class="kjboxta_h5c">/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <p id="g_start_btn4" class="kjboxta_nobtn">已开奖</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="g_in_t"><h5 id="g_qihao_5" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time5" class="kjboxta_h5a" >03-18 14:35</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span class="kj_box_total_sp">
+                                <span id="g_result501" class="label label-success">6+8+8=</span>
+                                <span id="g_result501_2" class="badge gbttdn_p1_sp">20</span>
+                                </span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult501" class="kjboxta_h5b" >0</h5>
+                            <h5 id="g_myresult502" class="kjboxta_h5c">/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <p id="g_start_btn5" class="kjboxta_a"> 已开奖</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="g_in_t"><h5 id="g_qihao_6" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time6" class="kjboxta_h5a">03-18 14:35</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span class="kj_box_total_sp">
+                                <span id="g_result601" class="label label-success">6+8+8=20</span>
+                                <span id="g_result601_2" class="badge gbttdn_p1_sp">20</span>
+                                </span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult601" class="kjboxta_h5b" >0</h5>
+                            <h5 id="g_myresult602" class="kjboxta_h5c" >/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <p id="g_start_btn6" class="kjboxta_a" > 已开奖</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="g_in_t"><h5 id="g_qihao_7" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time7" class="kjboxta_h5a">03-18 14:35</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span class="kj_box_total_sp">
+                                <span id="g_result701" class="label label-success">6+8+8=20</span>
+                                <span id="g_result701_2" class="badge gbttdn_p1_sp">20</span>
+                                </span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult701" class="kjboxta_h5b">0</h5>
+                            <h5 id="g_myresult702" class="kjboxta_h5c" >/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <p id="g_start_btn7" class="kjboxta_a"> 已开奖</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="g_in_t"><h5 id="g_qihao_8" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time8" class="kjboxta_h5a" >03-18 14:35</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span class="kj_box_total_sp">
+                                <span id="g_result801" class="label label-success">6+8+8=20</span>
+                                <span id="g_result801_2" class="badge gbttdn_p1_sp">20</span>
+                                </span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult801" class="kjboxta_h5b">0</h5>
+                            <h5 id="g_myresult802" class="kjboxta_h5c">/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <p id="g_start_btn8" class="kjboxta_a"> 已开奖</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="g_in_t"><h5 id="g_qihao_9" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time9" class="kjboxta_h5a">03-18 14:35</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span class="kj_box_total_sp">
+                                <span id="g_result901" class="label label-success">6+8+8=20</span>
+                                <span id="g_result901_2" class="badge gbttdn_p1_sp">20</span>
+                                </span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult901" class="kjboxta_h5b">0</h5>
+                            <h5 id="g_myresult902" class="kjboxta_h5c" >/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <p id="g_start_btn9" class="kjboxta_a"> 已开奖</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="g_in_t"><h5 id="g_qihao_10" class="kjboxta_h5a"></h5></td>
+                        <td class="g_in_t"><h5 id="g_qihao_time10" class="kjboxta_h5a" >03-18 14:35</h5></td>
+                        <td class="g_in_t">
+                            <h5>
+                                <span class="kj_box_total_sp">
+                                <span id="g_result1001" class="label label-success">6+8+8=20</span>
+                                <span id="g_result1001_2" class="badge gbttdn_p1_sp">20</span>
+                                </span>
+                            </h5>
+                        </td>
+                        <td class="g_in_t">
+                            <h5 id="g_myresult1001" class="kjboxta_h5b">0</h5>
+                            <h5 id="g_myresult1002" class="kjboxta_h5c">/&nbsp0</h5>
+                        </td>
+                        <td class="g_in_t">
+                            <p id="g_start_btn10" class="kjboxta_a"> 已开奖</p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <p id="zxdt" class="zxdt_p">
+                <marquee class="zxdt_mar"  onmouseover="this.stop()" onmouseout="this.start()">最新玩家动态</marquee>
+            </p>
+            <!-- 聊天室-->				
+            <div id="chatroom" class="chat_div">
+                <ul id="chat_Ul" class="chat_ul">
+                    <li class="chat_li">    
+                        <div  class="alert alert-success chat_li_div" role="alert">
+                        	<span class="chat_sp_name chat_sp_name_important">系统消息：</span>
+                        	<span class="chat_sp_content" >欢迎来到★28传奇★娱乐城</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--聊天输入框-->
+            <input type="text" id="chat_Input" class="form-control input-sm chat_input"  value="" placeholder="这里会显示你所投注的。" readonly="">
+            <!-- 底部投注操作 -->				
+            <div id="pc_Bet" class="pc_bet">
+                <!--  筹码操作 -->
+                <div class="row pc_bet_rowaa">				
+                    <div class="col-md-2 col-xs-2 col-sm-3 pcbet_numblan_div">
+                    	<div class="pc_bet_numAndBlance">
+                            <p class="pc_bet_nab_left_p1">期号：</p>
+                            <p id="pc_Bet_Num" class="pc_bet_nab_left_p3">88888888</p>
+                            <br />
+                            <p class="pc_bet_nab_left_p1">余额：</p>
+                            <p id="pc_Bet_Blance" class="pc_bet_nab_left_p2">88888888</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3 pcbet_options_div">
+                        <div class="pc_bet_options" id="pc_Bet_Options" >
+                        	<button onclick="changeGameSelect(1)"><a href="#" class="pc_bet_options_a">组合</a></button>
+                        	<button onclick="changeGameSelect(2)"><a href="#" class="pc_bet_options_a">特码</a></button>
+                        	<button onclick="changeGameSelect(3)"><a href="#" class="pc_bet_options_a">极值</a></button>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-xs-7 col-sm-6">
+                    	<div>
+                            <button id="should_submit" type="button" class="btn btn-success pc_bet_submit_btn" onclick="pcBetSubmit()" >提交</button>
+                            <button  type="button" class="btn btn-warning pc_bet_allcancel_btn" onclick="pcBetEmpty()">清空</button>
+                            <p class="pc_bet_done_p">已下注：<strong id="pc_Bet_DoneNum">0</strong></p>
+                        </div>
+                    </div>	
+                </div>
+                <!--筹码下注弹框-->
+                <div id="pc_doBet_Mask_Div">
+                    <div id="pc_doBet_Show_Div" >
+                        <a href="javascript:touzhuPopup(-1)">
+                            <span class="pc_dobet_show_span_close"><img src="{% static 'Lottery/image/icon_close.png' %}"></span>
+                        </a>
+                        <p class="pc_dobet_show_p">
+                            您选择了 <strong id="pc_doBet_Select" class="pc_dobet_selecttype">小单</strong>
+                            &nbsp赔率为 <strong id="pc_doBet_SelectOdds" class="pc_dobet_selectodds">4.1</strong>
+                        </p>
+                        <div class="row">
+                            <div class="col-md-8 col-xs-8 col-sm-8"><input class="form-control pc_dobet_input"   maxlength="10"  onKeyUp="dobet_keyup()" onpaste="return false" type="text" id="pc_doBet_Money" placeholder="请输入筹码数" >
+                            </div>
+                            <div class="col-md-4 col-xs-4 col-sm-4">
+                                <div class="pc_dobet_show_btn">
+                                <button id="pc_touzhu_submit" onclick="pcDoBetFrom()" class="btn btn btn-info btn-sm">确定</button>
+                                <button id="pc_touzhu_soha" onclick="pcDoBetPoker()" class="btn btn-danger btn-sm">梭哈</button>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="pc_touzhu_tips" class=" pc_dobet_tips_p">请填入大于0的数字</p>
+                        <div class="pc_dobet_btn_couma">
+                            <button class="btn btn btn-primary couma_btn1" onclick="clickChip(20)">20</button>
+                            <button class="btn btn btn-success couma_btn2"
+                                    onclick="clickChip(100)">100</button>
+                            <button class="btn btn btn-info couma_btn3"
+                                    onclick="clickChip(500)">500</button>
+                            <button class="btn btn btn-warning couma_btn4"
+                                    onclick="clickChip(2000)">2000</button>
+                            <button class="btn btn btn-danger couma_btn5"
+                                    onclick="clickChip(5000)">5000</button>
+                        </div>
+                    </div>
+                </div>			
+                <!--投注选项按钮 例如小单大单等 -->				
+                <div id="pc_doBet_Options1" >
+                    <!--1001 前两位10 11表示大小 后两位01 02表示单双  特码就数字1-28 极大1111极小1010 大1100 小1000 单1201 双1202-->
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 col-sm-6 pdbo_col1">
+                            <div class="pc_dobet_option_odds0">x4.0</div>
+                            <div id="pc_M_0" class="pc_dobet_option_money0">0</div>
+                            <button onclick="touzhuPopup(1101)" class="pc_dobet_option_btn1">
+                                <p class="pc_dobet_option_name1">大单</p>
+                            </button>
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6 pdbo_col2">
+                            <div class="pc_dobet_option_odds1">x4.0</div>
+                            <div id="pc_M_1" class="pc_dobet_option_money1">0</div>
+                            <button onclick="touzhuPopup(1102)" class="pc_dobet_option_btn1">
+                                <p class="pc_dobet_option_name1">大双</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 col-sm-6 pdbo_col1">
+                            <div class="pc_dobet_option_odds0">x4.0</div>
+                            <div id="pc_M_2" class="pc_dobet_option_money0">0</div>
+                            <button onclick="touzhuPopup(1001)" class="pc_dobet_option_btn1">
+                                <p class="pc_dobet_option_name1">小单</p>
+                            </button>
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6 pdbo_col2">
+                            <div class="pc_dobet_option_odds1">x4.0</div>
+                            <div id="pc_M_3" class="pc_dobet_option_money1">0</div>
+                            <button onclick="touzhuPopup(1002)" class="pc_dobet_option_btn1">
+                                <p class="pc_dobet_option_name1">小双</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 col-sm-6 pdbo_col1">
+                            <div class="col-md-6 col-xs-6 col-sm-6 pc_dobet_option1_downdiv">
+                                <div class="pc_dobet_option_odds2">x2.0</div>
+                                <div id="pc_M_4" class="pc_dobet_option_money2">0</div>
+                                <button onclick="touzhuPopup(1100)" class="pc_dobet_option_btn2">
+                                <p class="">大</p>
+                                </button>
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 pc_dobet_option1_downdiv">
+                                <div class="pc_dobet_option_odds3">x2.0</div>
+                                <div id="pc_M_5" class="pc_dobet_option_money3">0</div>
+                                <button onclick="touzhuPopup(1000)" class="pc_dobet_option_btn2">
+                                <p class="">小</p>
+                            </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6 pdbo_col2">
+                            <div class="col-md-6 col-xs-6 col-sm-6  pc_dobet_option1_downdiv">
+                                <div class="pc_dobet_option_odds2">x2.0</div>
+                                <div id="pc_M_6" class="pc_dobet_option_money2">0</div>
+                                <button onclick="touzhuPopup(1201)" class="pc_dobet_option_btn2">
+                                <p class="">单</p>
+                                </button>
+                            </div>
+                            <div class="col-md-6 col-xs-6 col-sm-6 pc_dobet_option1_downdiv">
+                                <div class="pc_dobet_option_odds3">x2.0</div>
+                                <div id="pc_M_7" class="pc_dobet_option_money3">0</div>
+                                <button onclick="touzhuPopup(1202)" class="pc_dobet_option_btn2">
+                                <p class="">双</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--28个数字按钮 -->				
+                <div id="pc_doBet_Options2">
+                        <table class="pc_dobet_option_num28">
+                        <tr>
+                            <td class="num_td">
+                                <div id="pc_M_8" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(1)">
+                                    <p>00</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_9" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(2)">
+                                    <p>01</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_10" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(3)">
+                                    <p>02</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_11" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(4)">
+                                    <p>03</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_12" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(5)">
+                                    <p>04</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_13" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(6)">
+                                    <p>05</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_14" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(7)">
+                                    <p>06</p>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="num_td">
+                                <div id="pc_M_15" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(8)">
+                                    <p>07</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_16" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(9)">
+                                    <p>08</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_17" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(10)">
+                                    <p>09</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_18" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(11)">
+                                    <p>10</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_19" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(12)">
+                                    <p>11</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_20" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(13)">
+                                    <p>12</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_21" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(14)">
+                                    <p>13</p>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="num_td">
+                                <div id="pc_M_22" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(15)">
+                                    <p>14</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_23" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(16)">
+                                    <p>15</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_24" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(17)">
+                                    <p>16</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_25" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(18)">
+                                    <p>17</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_26" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(19)">
+                                    <p>18</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_27" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(20)">
+                                    <p>19</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_28" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(21)">
+                                    <p>20</p>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="num_td">
+                                <div id="pc_M_29" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(22)">
+                                    <p>21</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_30" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(23)">
+                                    <p>22</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_31" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(24)">
+                                    <p>23</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_32" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(25)">
+                                    <p>24</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_33" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(26)">
+                                    <p>25</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_34" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(27)">
+                                    <p>26</p>
+                                </button>
+                            </td>
+                            <td class="num_td">
+                                <div id="pc_M_35" class="tz_num_tips_a">0</div>
+                                <div class="tz_num_tips_b">x12.0</div>
+                                <button class="g_btn_num"onclick="touzhuPopup(28)">
+                                    <p>27</p>
+                                </button>
+                            </td>
+                        </tr>
+                        </table>
+                </div>			
+                <!-- 极大极小按钮-->				
+                <div id="pc_doBet_Options3">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <button onclick="touzhuPopup(1111)" class="pc_dobet_option_btn3">
+                                <div id="pc_M_36" class="pc_dobet_option_money4">0</div>
+                                <div class="pc_dobet_option_odds4">x12.0</div>
+                                <p >极大</p>
+                            </button>                 
+                        </div>
+                        <div class="col-md-6 col-xs-6 col-sm-6">
+                            <button onclick="touzhuPopup(1010)" class="pc_dobet_option_btn4">
+                                <div id="pc_M_37" class="pc_dobet_option_money4">0</div>
+                                <div class="pc_dobet_option_odds4">x12.0</div>
+                                <p >极小</p>
+                            </button>
+                        </div>
+                    </div>
+               </div>				
+            </div>
+            <!-- 手机投注操作 -->
+            <div id="alltouzhu" class="ready-go">
+            <!--  筹码操作 -->
+                <!-- 余额期号显示栏-->             
+                    <div class="row xiazhuTips">
+                        <ul class="yixiazhu  col-md-4 col-xs-4 col-sm-4">
+                            <li><span>已下注：</span></li>
+                            <li><span id="youyixiazhu">0</span></li>
+                        </ul> 
+                        <ul class="yingli  col-md-4 col-xs-4 col-sm-4">
+                            <li><span>本局盈利：</span></li>
+                            <li><span id="youyingli">0</span></li>
+                        </ul> 
+                        <ul class="yuer col-md-4 col-xs-4 col-sm-4">
+                            <li> <span>余额：</span></li>
+                            <li> <span id="youyuer">0</span></li>
+                        </ul>           
+                    </div>
+                    <div class="row anniu" id="xuanze" >
+                        <div class="anniu-btn">
+                            <button type="button" class="xuanze01" >组合</button>
+                        </div>
+                        <div class="anniu-btn ">
+                            <button type="button" class="xuanze02" >特码</button>
+                        </div>    
+                        <div class="anniu-btn">
+                            <button type="button" class="xuanze03" >极值</button>
+                        </div>           
+                        <div class="anniu-btn2" >
+                            <div class="anniu-btn">
+                                <button id="ip_submit_btn" type="button" class="xuanze04" onclick="tijiao()">提交</button>
+                            </div>
+                            <div class="anniu-btn">
+                                <button type="button" class="xuanze05" onclick="qingkong()">清空</button>
+                            </div>
+                        </div>    
+                    </div>
+            
+                       <!--替换部分-->
+                    <div class="zuhe">
+                        <div class="zuhe01">
+                            <ul>
+                               <li ><div class="zhuname" id="tzname01">大单</div>
+                                   <div class="peilv" id="peilv01">x4</div>
+                                   <div class="yazhu" id="yazhu01">0</div>
+                               </li>
+                               <li ><div class="zhuname" id="tzname02">小单</div>
+                                   <div class="peilv" id="peilv02">x4</div>
+                                   <div class="yazhu" id="yazhu02">0</div>
+                               </li>
+                               <li ><div class="zhuname" id="tzname03">大双</div>
+                                   <div class="peilv" id="peilv03">x4</div>
+                                   <div class="yazhu" id="yazhu03">0</div>
+                               </li>
+                               <li ><div class="zhuname" id="tzname04">小双</div>
+                                   <div class="peilv" id="peilv04">x4</div>
+                                   <div class="yazhu" id="yazhu04">0</div>
+                               </li>
+                            </ul>
+                        </div>
+                        <div class="zuhe02">
+                           <ul>
+                              <li><div class="zhuname" id="tzname05">大</div>
+                                  <div class="peilv" id="peilv05">x2</div>
+                                  <div  class="yazhu" id="yazhu05">0</div>
+                              </li>
+                              <li><div class="zhuname" id="tzname06">小</div>
+                                  <div class="peilv" id="peilv06">x2</div>
+                                  <div  class="yazhu" id="yazhu06">0</div>
+                              </li>
+                              <li><div class="zhuname" id="tzname07">单</div>
+                                  <div class="peilv" id="peilv07">x2</div>
+                                  <div  class="yazhu" id="yazhu07">0</div>
+                              </li>
+                              <li><div class="zhuname" id="tzname08">双</div>
+                                  <div class="peilv" id="peilv08">x2</div>
+                                  <div  class="yazhu" id="yazhu08">0</div>
+                              </li>
+                           </ul>
+                        </div>
+                    </div>
+                    <div class="tema">
+                        <div class="tema1">
+                            <div class="tema0-3">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname09">00</div>
+                                        <div class="temapei" id="peilv09">x12</div>
+                                        <div class="temazhu" id="yazhu09">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname10">01</div>
+                                        <div class="temapei" id="peilv10">x12</div>
+                                        <div class="temazhu" id="yazhu10">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname11">02</div>
+                                        <div class="temapei" id="peilv11">x12</div>
+                                        <div class="temazhu" id="yazhu11">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname12">03</div>
+                                        <div class="temapei" id="peilv12">x12</div>
+                                        <div class="temazhu" id="yazhu12">0</div>
+                                    </li>
+                                </ul>
+                            </div>     
+                            <div class="tema4-6">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname13">04</div>
+                                        <div class="temapei" id="peilv13">x12</div>
+                                        <div class="temazhu" id="yazhu13">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname14">05</div>
+                                        <div class="temapei" id="peilv14">x12</div>
+                                        <div class="temazhu" id="yazhu14">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname15">06</div>
+                                        <div class="temapei" id="peilv15">x12</div>
+                                        <div class="temazhu" id="yazhu15">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="page2" >特码7-13</div>
+                                        <div class="page3" >特码14-20</div>
+                                        <div class="page4" >特码21-27</div>
+                                    </li>                                
+                                </ul>
+                            </div>            
+                        </div>
+                        <div class="tema2">
+                            <div class="tema7-10">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname16">07</div>
+                                        <div class="temapei" id="peilv16">x12</div>
+                                        <div class="temazhu" id="yazhu16">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname17">08</div>
+                                        <div class="temapei" id="peilv17">x12</div>
+                                        <div class="temazhu" id="yazhu17">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname18">09</div>
+                                        <div class="temapei" id="peilv18">x12</div>
+                                        <div class="temazhu" id="yazhu18">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname19">10</div>
+                                        <div class="temapei" id="peilv19">x12</div>
+                                        <div class="temazhu" id="yazhu19">0</div>
+                                    </li>
+                                </ul>
+                            </div>     
+                            <div class="tema11-13">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname20">11</div>
+                                        <div class="temapei" id="peilv20">x12</div>
+                                        <div class="temazhu" id="yazhu20">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname21">12</div>
+                                        <div class="temapei" id="peilv21">x12</div>
+                                        <div class="temazhu" id="yazhu21">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname22">13</div>
+                                        <div class="temapei" id="peilv22">x12</div>
+                                        <div class="temazhu" id="yazhu22">0</div>
+                                    </li>
+                                    <li><div class="page1">特码00-06</div>
+                                        <div class="page3">特码14-20</div>
+                                        <div class="page4">特码21-27</div>
+                                    </li>
+                                </ul>
+                            </div>            
+                        </div>
+                        <div class="tema3">
+                            <div class="tema14-17">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname23">14</div>
+                                        <div class="temapei" id="peilv23">x12</div>
+                                        <div class="temazhu" id="yazhu23">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname24">15</div>
+                                        <div class="temapei" id="peilv24">x12</div>
+                                        <div class="temazhu" id="yazhu24">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname25">16</div>
+                                        <div class="temapei" id="peilv25">x12</div>
+                                        <div class="temazhu" id="yazhu25">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname26">17</div>
+                                        <div class="temapei" id="peilv26">x12</div>
+                                        <div class="temazhu" id="yazhu26">0</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tema18-20">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname27">18</div>
+                                        <div class="temapei" id="peilv27">x12</div>
+                                        <div class="temazhu" id="yazhu27">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname28">19</div>
+                                        <div class="temapei" id="peilv28">x12</div>
+                                        <div class="temazhu" id="yazhu28">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname29">20</div>
+                                        <div class="temapei" id="peilv29">x12</div>
+                                        <div class="temazhu" id="yazhu29">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="page1">特码00-06</div>
+                                        <div class="page2">特码07-13</div>
+                                        <div class="page4">特码21-27</div>
+                                    </li>                                
+                                </ul>
+                            </div>
+                        </div>    
+                        <div class="tema4">
+                            <div class="tema21-24">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname30">21</div>
+                                        <div class="temapei" id="peilv30">x12</div>
+                                        <div class="temazhu" id="yazhu30">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname31">22</div>
+                                        <div class="temapei" id="peilv31">x12</div>
+                                        <div class="temazhu" id="yazhu31">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname32">23</div>
+                                        <div class="temapei" id="peilv32">x12</div>
+                                        <div class="temazhu" id="yazhu32">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname33">24</div>
+                                        <div class="temapei" id="peilv33">x12</div>
+                                        <div class="temazhu" id="yazhu33">0</div>
+                                    </li>
+                                </ul>
+                            </div>       
+                            <div class="tema25-27">
+                                <ul>
+                                    <li>
+                                        <div class="temashu" id="tzname34">25</div>
+                                        <div class="temapei" id="peilv34">x12</div>
+                                        <div class="temazhu" id="yazhu34">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname35">26</div>
+                                        <div class="temapei" id="peilv35">x12</div>
+                                        <div class="temazhu" id="yazhu35">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="temashu" id="tzname36">27</div>
+                                        <div class="temapei" id="peilv36">x12</div>
+                                        <div class="temazhu" id="yazhu36">0</div>
+                                    </li>
+                                    <li>
+                                        <div class="page1">特码00-06</div>
+                                        <div class="page2">特码07-13</div>
+                                        <div class="page3">特码14-20</div>
+                                    </li>                                
+                                </ul>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="jizhi">
+                        <ul>
+                           <li class="jida" >
+                              <div class="jizhiname" id="tzname37">极大</div>
+                              <div class="jizhipei" id="peilv37">x12</div>
+                              <div class="jizhizhu" id="yazhu37">0</div>
+                           </li>
+                           <li class="jixiao" >
+                              <div class="jizhiname" id="tzname38">极小</div>
+                              <div class="jizhipei" id="peilv38">x12</div>
+                              <div class="jizhizhu" id="yazhu38">0</div>
+                           </li>
+                        </ul>    
+                    </div>
+                    <div class="Tipstan">
+                        <div class="Tipstan-ul">
+                            <ul>
+                               <li class="Tipstan01">
+                                   你选择了&nbsp“<span id="Tipstans"></span>”&nbsp
+                                   赔率是&nbsp“<span id="Tipstant"></span>”&nbsp 
+                                </li>
+                               <form  method="post" onsubmit="return Touzhu()">
+                               <li>
+                                   <input type="text" name="suoyazhushu" value="" id="youzhushu" onkeyup="checkTouzhu()" placeholder="请输入筹码数"/>
+                                   <input type="hidden" name="Tzname" id="TzId" value="">
+                               </li>
+                               </form>
+                               <li>
+                                   <input type="submit" name="submit" id="yesbtn" value="确定">
+                                   <input type="submit" name="reset"  id="nobtn"value="取消">
+                               </li>
+                               <li id="Tipsyuer"></li>
+                              
+                            </ul>
+                        </div>    
+                    </div>
+                      <!--替换部分/-->
+            
+                <!-- end 余额期号显示 --> 
+            <!--投注选项按钮 例如小单大单等 -->              
+            </div>
+		</div>
+    <!-- end游戏内容 by tu -->
+    <!-- model 下注成功和中奖提示-->
+        <div class="modal_game in" id="model-bingo" role="dialog" aria-labeledby="loginModallabel"> <a class="close" data-dismiss="modal">×</a>
+            <div class="modal-content m-game-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">上期投注中奖</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您在快乐28 700854期 赢得奖金5000</p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+              </div>
+            </div><!-- /.modal-content -->
+        </div>
+    <!-- end 下注成功和中奖提示-->
+{% endblock %}
+
+
+{% block customscript %}    
+    <script src="{% static 'Lottery/js/index.js'%}"></script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'Lottery/base.html' %}
+{% load staticfiles %}
+
+{% block customsytle %}     <!-- 中间添加样式连接 <link> -->
+    
+{% endblock %}
+
+{% block game %}        <!-- 中间添加内容 -->
+    
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">下注历史</div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <th>序号</th>
+                <th>游戏</th>
+                <th>期号</th>
+                <th>投注</th>
+                <th>下注金币</th>
+                <th>下注时间</th>
+            </thead>
+            <tbody>
+                {% for item in bethistory %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td> {{ item.gameid.gamename }} </td>
+                    <td> {{ item.issueid.issueNO }} </td>
+                    <td> {{ item.ruleid.ruledesc }} </td>
+                    <td> {{ item.amount }} </td>
+                    <td> {{ item.bettime }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
+
+{% block customscript %}    
+    <script src="{% static 'Lottery/js/rule.js'%}"></script>
+{% endblock %}

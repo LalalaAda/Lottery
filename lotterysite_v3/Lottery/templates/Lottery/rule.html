@@ -1,0 +1,377 @@
+{% extends 'Lottery/base.html' %}
+{% load staticfiles %}
+
+{% block customsytle %}     <!-- 中间添加样式连接 <link> -->
+    <link href="{% static 'Lottery/css/rule.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block game %}        <!-- 中间添加内容 -->
+        <!--游戏规则start-->
+			<div class=" row mid_1right"  >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>如何注册</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">                   
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何注册：</p>
+                        <p>
+                            打开浏览器，在地址栏输入：http://cq28.com,进入网站，点击左侧“立即注册”按扭，认真填写您的用户名和密码，确认即可。
+                        </p>                     
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何登陆：</p>
+                        <p>
+                            打开浏览器，进入网站，在用户名框中输入您注册时用户名，密码框中输入您注册时所填写的密码，点击“登入游戏”，登入框变成了您的信息即登入成功，登入成功即可参加游戏。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何充值：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的充值按扭，详细填写您的充值金额，会员帐号，确定即转入到网上银行页面，根据提示操作即可完成充值。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何提现：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的提现按扭，即可申请提现，在申请提现对话框中详细输入您的收款帐号信息及提现金额，确认提交，即申请提现成功，申请提现后工作人员会在二小时之内把您的提现金额转入到您输入的银行卡中。
+                        </p>                       
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何转帐：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的转帐按扭，即可向本站其它会员转帐（比如您的朋友），在转帐对话框中正确填写对方的用户名及转帐金额后，按确认提交即可转赠本站的余额分值给对方，对方即马上收到您的转帐分值，相应您的余额会值也相应减少。
+                        </p>
+                    </div>
+                </div>    
+			</div>
+			<div class=" row mid_1right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>如何登陆</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">                   
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何注册：</p>
+                        <p>
+                            打开浏览器，在地址栏输入：http://cq28.com,进入网站，点击左侧“立即注册”按扭，认真填写您的用户名和密码，确认即可。
+                        </p>                     
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何登陆：</p>
+                        <p>
+                            打开浏览器，进入网站，在用户名框中输入您注册时用户名，密码框中输入您注册时所填写的密码，点击“登入游戏”，登入框变成了您的信息即登入成功，登入成功即可参加游戏。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何充值：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的充值按扭，详细填写您的充值金额，会员帐号，确定即转入到网上银行页面，根据提示操作即可完成充值。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何提现：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的提现按扭，即可申请提现，在申请提现对话框中详细输入您的收款帐号信息及提现金额，确认提交，即申请提现成功，申请提现后工作人员会在二小时之内把您的提现金额转入到您输入的银行卡中。
+                        </p>                       
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何转帐：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的转帐按扭，即可向本站其它会员转帐（比如您的朋友），在转帐对话框中正确填写对方的用户名及转帐金额后，按确认提交即可转赠本站的余额分值给对方，对方即马上收到您的转帐分值，相应您的余额会值也相应减少。
+                        </p>
+                    </div>
+                </div>    
+			</div>
+			<div class=" row mid_1right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>如何充值</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">                   
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何注册：</p>
+                        <p>
+                            打开浏览器，在地址栏输入：http://cq28.com,进入网站，点击左侧“立即注册”按扭，认真填写您的用户名和密码，确认即可。
+                        </p>                     
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何登陆：</p>
+                        <p>
+                            打开浏览器，进入网站，在用户名框中输入您注册时用户名，密码框中输入您注册时所填写的密码，点击“登入游戏”，登入框变成了您的信息即登入成功，登入成功即可参加游戏。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何充值：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的充值按扭，详细填写您的充值金额，会员帐号，确定即转入到网上银行页面，根据提示操作即可完成充值。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何提现：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的提现按扭，即可申请提现，在申请提现对话框中详细输入您的收款帐号信息及提现金额，确认提交，即申请提现成功，申请提现后工作人员会在二小时之内把您的提现金额转入到您输入的银行卡中。
+                        </p>                       
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何转帐：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的转帐按扭，即可向本站其它会员转帐（比如您的朋友），在转帐对话框中正确填写对方的用户名及转帐金额后，按确认提交即可转赠本站的余额分值给对方，对方即马上收到您的转帐分值，相应您的余额会值也相应减少。
+                        </p>
+                    </div>
+                </div>    
+			</div>
+			<div class=" row mid_1right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>如何提现</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">                   
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何注册：</p>
+                        <p>
+                            打开浏览器，在地址栏输入：http://cq28.com,进入网站，点击左侧“立即注册”按扭，认真填写您的用户名和密码，确认即可。
+                        </p>                     
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何登陆：</p>
+                        <p>
+                            打开浏览器，进入网站，在用户名框中输入您注册时用户名，密码框中输入您注册时所填写的密码，点击“登入游戏”，登入框变成了您的信息即登入成功，登入成功即可参加游戏。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何充值：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的充值按扭，详细填写您的充值金额，会员帐号，确定即转入到网上银行页面，根据提示操作即可完成充值。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何提现：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的提现按扭，即可申请提现，在申请提现对话框中详细输入您的收款帐号信息及提现金额，确认提交，即申请提现成功，申请提现后工作人员会在二小时之内把您的提现金额转入到您输入的银行卡中。
+                        </p>                       
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何转帐：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的转帐按扭，即可向本站其它会员转帐（比如您的朋友），在转帐对话框中正确填写对方的用户名及转帐金额后，按确认提交即可转赠本站的余额分值给对方，对方即马上收到您的转帐分值，相应您的余额会值也相应减少。
+                        </p>
+                    </div>
+                </div>    
+			</div>
+			<div class=" row mid_1right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>如何转账</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">                   
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何注册：</p>
+                        <p>
+                            打开浏览器，在地址栏输入：http://cq28.com,进入网站，点击左侧“立即注册”按扭，认真填写您的用户名和密码，确认即可。
+                        </p>                     
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何登陆：</p>
+                        <p>
+                            打开浏览器，进入网站，在用户名框中输入您注册时用户名，密码框中输入您注册时所填写的密码，点击“登入游戏”，登入框变成了您的信息即登入成功，登入成功即可参加游戏。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何充值：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的充值按扭，详细填写您的充值金额，会员帐号，确定即转入到网上银行页面，根据提示操作即可完成充值。
+                        </p>                      
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何提现：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的提现按扭，即可申请提现，在申请提现对话框中详细输入您的收款帐号信息及提现金额，确认提交，即申请提现成功，申请提现后工作人员会在二小时之内把您的提现金额转入到您输入的银行卡中。
+                        </p>                       
+                        <p>&nbsp;</p>
+                        <p class="ziti">如何转帐：</p>
+                        <p>
+                            登陆成功后，点击左侧信息框中的转帐按扭，即可向本站其它会员转帐（比如您的朋友），在转帐对话框中正确填写对方的用户名及转帐金额后，按确认提交即可转赠本站的余额分值给对方，对方即马上收到您的转帐分值，相应您的余额会值也相应减少。
+                        </p>
+                    </div>
+                </div>    
+			</div>
+        <!--游戏规则end-->
+        <!--帮助中心-->
+			<div class=" row mid_2right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>游戏规则</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">
+                        <p class="ziti">游戏规则：</p>
+                        <p>玩家猜屏幕上方即将开出的花色和大小王来决定玩家输赢，猜对时根据相应的赔率规则来赔。每轮提供100局供玩家猜。</p>
+                        <p class="ziti">赔率说明：</p>
+                        <p>A、黑桃、红桃赔率： 3.8倍</p>
+                        <p>B、草花、方块赔率： 4　倍</p>
+                        <p>C、大　小　王赔率：20 倍（注：出王时，别的花色押分退回）</p>
+                        <p class="ziti">押注方法：</p>
+                        <p>在三十秒内押注，时间一到自动确认投注。点击操作盘上对应的花色按扭，点击一次即下注5分值，长按为连续下注。</p>			
+                        <p class="ziti">分值比例：</p>
+                        <p>充值10元即为10分</p>		
+                        <p class="ziti">账号已经被盗该怎么办？</p>
+                        <p>玩家账号被盗了，可以提供相应的注册时信息进行密码申述或咨询客服进行解决！</p>		
+                        <p class="ziti">在网吧怎么防止被盗</p>
+                        <p>提醒您，尽量不去陌生网吧及黑网吧，输入帐号密码时防止被别人偷窥，打乱输入顺序，让木马变“木”。比如：密码为123456，输入时可以先写6，然后将光标位置换到前面写3，再换一下光标位置写1，等等。</p>		
+                        <p class="ziti">怎么防止游戏币被盗！</p>
+                        <p>为了更好的保护玩家的账号安全，防止游戏币被盗，玩家需定期更换密码，完善账户安全信息，提高账号密码的保密度！</p>
+                        <p class="ziti">怎样保障账号安全</p>
+                        <p>玩家尽量把密码设置相对复杂，巩固自己的计算机系统，及时更新防火墙及杀毒软件，警惕糖衣炮弹，慎入不明网站！</p>			
+                        <p class="ziti">&nbsp;</p>
+                    </div>
+                </div>    
+			</div>
+			<div class=" row mid_2right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>倍数说明</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">
+                        <p class="ziti">游戏规则：</p>
+                        <p>玩家猜屏幕上方即将开出的花色和大小王来决定玩家输赢，猜对时根据相应的赔率规则来赔。每轮提供100局供玩家猜。</p>
+                        <p class="ziti">赔率说明：</p>
+                        <p>A、黑桃、红桃赔率： 3.8倍</p>
+                        <p>B、草花、方块赔率： 4　倍</p>
+                        <p>C、大　小　王赔率：20 倍（注：出王时，别的花色押分退回）</p>
+                        <p class="ziti">押注方法：</p>
+                        <p>在三十秒内押注，时间一到自动确认投注。点击操作盘上对应的花色按扭，点击一次即下注5分值，长按为连续下注。</p>		
+                        <p class="ziti">分值比例：</p>
+                        <p>充值10元即为10分</p>	
+                        <p class="ziti">账号已经被盗该怎么办？</p>
+                        <p>玩家账号被盗了，可以提供相应的注册时信息进行密码申述或咨询客服进行解决！</p>		
+                        <p class="ziti">在网吧怎么防止被盗</p>
+                        <p>提醒您，尽量不去陌生网吧及黑网吧，输入帐号密码时防止被别人偷窥，打乱输入顺序，让木马变“木”。比如：密码为123456，输入时可以先写6，然后将光标位置换到前面写3，再换一下光标位置写1，等等。</p>		
+                        <p class="ziti">怎么防止游戏币被盗！</p>
+                        <p>为了更好的保护玩家的账号安全，防止游戏币被盗，玩家需定期更换密码，完善账户安全信息，提高账号密码的保密度！</p>							
+                        <p class="ziti">怎样保障账号安全</p>
+                        <p>玩家尽量把密码设置相对复杂，巩固自己的计算机系统，及时更新防火墙及杀毒软件，警惕糖衣炮弹，慎入不明网站！</p>		
+                        <p class="ziti">&nbsp;</p>
+                    </div>
+                </div>    
+			</div>
+			<div class=" row mid_2right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>押注方法</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">
+                        <p class="ziti">游戏规则：</p>
+                        <p>玩家猜屏幕上方即将开出的花色和大小王来决定玩家输赢，猜对时根据相应的赔率规则来赔。每轮提供100局供玩家猜。</p>
+                        <p class="ziti">赔率说明：</p>
+                        <p>A、黑桃、红桃赔率： 3.8倍</p>
+                        <p>B、草花、方块赔率： 4　倍</p>
+                        <p>C、大　小　王赔率：20 倍（注：出王时，别的花色押分退回）</p>
+                        <p class="ziti">押注方法：</p>
+                        <p>在三十秒内押注，时间一到自动确认投注。点击操作盘上对应的花色按扭，点击一次即下注5分值，长按为连续下注。</p>
+                        <p class="ziti">分值比例：</p>
+                        <p>充值10元即为10分</p>
+                        <p class="ziti">账号已经被盗该怎么办？</p>
+                        <p>玩家账号被盗了，可以提供相应的注册时信息进行密码申述或咨询客服进行解决！</p>		
+                        <p class="ziti">在网吧怎么防止被盗</p>
+                        <p>提醒您，尽量不去陌生网吧及黑网吧，输入帐号密码时防止被别人偷窥，打乱输入顺序，让木马变“木”。比如：密码为123456，输入时可以先写6，然后将光标位置换到前面写3，再换一下光标位置写1，等等。							</p>
+                        <p class="ziti">怎么防止游戏币被盗！</p>
+                        <p>为了更好的保护玩家的账号安全，防止游戏币被盗，玩家需定期更换密码，完善账户安全信息，提高账号密码的保密度！</p>
+                        <p class="ziti">怎样保障账号安全</p>
+                        <p>玩家尽量把密码设置相对复杂，巩固自己的计算机系统，及时更新防火墙及杀毒软件，警惕糖衣炮弹，慎入不明网站！</p>		
+                        <p class="ziti">&nbsp;</p>
+                    </div>
+                </div>    
+			</div>
+            <div class=" row mid_2right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>分值比例</h2></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/">
+                                <img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mid_right_content">
+                        <p class="ziti">游戏规则：</p>
+                        <p>玩家猜屏幕上方即将开出的花色和大小王来决定玩家输赢，猜对时根据相应的赔率规则来赔。每轮提供100局供玩家猜。</p>
+                        <p class="ziti">赔率说明：</p><p>A、黑桃、红桃赔率： 3.8倍</p>
+                        <p>B、草花、方块赔率： 4　倍</p>
+                        <p>C、大　小　王赔率：20 倍（注：出王时，别的花色押分退回）</p>
+                        <p class="ziti">押注方法：</p>
+                        <p>在三十秒内押注，时间一到自动确认投注。点击操作盘上对应的花色按扭，点击一次即下注5分值，长按为连续下注。</p>
+                        <p class="ziti">分值比例：</p>
+                        <p>充值10元即为10分</p>
+                        <p class="ziti">账号已经被盗该怎么办？</p>
+                        <p>玩家账号被盗了，可以提供相应的注册时信息进行密码申述或咨询客服进行解决！</p>
+                        <p class="ziti">在网吧怎么防止被盗</p>
+                        <p>提醒您，尽量不去陌生网吧及黑网吧，输入帐号密码时防止被别人偷窥，打乱输入顺序，让木马变“木”。比如：密码为123456，输入时可以先写6，然后将光标位置换到前面写3，再换一下光标位置写1，等等。</p>
+                        <p class="ziti">怎么防止游戏币被盗！</p>
+                        <p>为了更好的保护玩家的账号安全，防止游戏币被盗，玩家需定期更换密码，完善账户安全信息，提高账号密码的保密度！</p>
+                        <p class="ziti">怎样保障账号安全</p>
+                        <p>玩家尽量把密码设置相对复杂，巩固自己的计算机系统，及时更新防火墙及杀毒软件，警惕糖衣炮弹，慎入不明网站！</p>
+                        <p class="ziti">&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+			<div class=" row mid_2right" >
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class=" row mid_right_top">
+                        <div class="col-md-9 col-sm-9 col-xs-9 mid_right_left">
+                            <h2>会员代理</h2>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 mid_right_right">
+                            <a href="/testindex/"><img src="{% static 'Lottery/image/fh_03.png' %}" width="100px" height="40px"></a>
+                        </div>
+                    </div>    
+                    <div class="mid_right_content">
+                        <p class="ziti">如何成为代理：</p>
+                        <p>充值1000元以上并且下注量达到2000以上的会员即可自动获得代理的资格。</p>
+                        <p class="ziti">推广代理流程：</p>
+                        <p>1.登陆您的账号，点击“修改资料”，最后一项“手机”框里填入能联系到您的真实手机号码。</p>
+                        <p> 2.您推荐来的朋友注册账号登陆游戏，充值200元以上后。您朋友点击在线客服，把他的游戏账号以及您的手机号码报送给客服。客服会赠送58元给您朋友，同时登记他的账号为您推荐来的。</p>
+                        <p class="ziti">下注量返利：</p>
+                        <p>系统每天0：00后自动统计每个会员的昨日下注量，并返利下注量的1%给会员本人。每天上午十点前，工作人员会统计您所推广的玩家昨天的下注总量，并返利1%到您的游戏账户上。注：充值1000元，很大机率能积累30000元的下注量，返利则是300元！</p>
+                        <p class="ziti">代理等级及收益：</p>
+                        <p>除了以上下注量返利之外，成功推广玩家则还有以下代理工资和收益：</p>
+                        <p>推荐人：1-4个业绩，基础工资68元 + 30元/人 ；例：成功推荐3个人则：68+60元</p>
+                        <p>初级代理：5-19个业绩，基础工资168元 + (超出基础5个外)50元/人 ；例：成功推荐12个人则：168+350元（超出7个）</p>
+                        <p> 中级代理：20-99个业绩，基础工资1988元 + (超出基础20个外)70元/人 ；例：成功推荐33个人则：1988+910元（超出13个）</p>
+                        <p> 高级代理：100个业绩以上，基础工资12988元 + (超出基础100个外)100元/人 ；例：成功推荐105个人则：12988+500(超出5个)</p>
+                        <p>注：代理推广来的的玩家当月下注量超过 2000 方能成为该代理的有效客户算入业绩！</p>
+                        <p class="ziti">会员红利：</p>
+                        <p>本站的开设旨在向全国推广单挑王游戏，并非以盈利为目标。所有玩家的充值除去网站项目运营成本全部进入“彩金池”内，系统根据每个用户的“活跃度”返还给全体会员。</p>
+                        <p>系统每月根据会员的“登陆次数，下注量，充值量、在线时间”来判断会员的“活跃度”，活跃度的大小直接关系到每月发放会员红利时的多少。</p>
+                        <p class="ziti">&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        <!--帮助中心end-->
+{% endblock %}
+
+
+{% block customscript %}    
+    <script src="{% static 'Lottery/js/rule.js'%}"></script>
+{% endblock %}

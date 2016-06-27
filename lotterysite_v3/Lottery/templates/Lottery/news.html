@@ -1,0 +1,23 @@
+{% extends 'Lottery/base.html' %}
+{% load staticfiles %}
+
+{% block customsytle %}     <!-- 中间添加样式连接 <link> -->
+    
+{% endblock %}
+
+{% block game %}        <!-- 中间添加内容 -->
+    
+    <div class="panel panel-success">
+        <div class="panel-heading">{{ news.title }}</div>
+            <div class="panel-body">
+                {{ news.content|safe|escape }}
+            </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block customscript %}    
+    <script src="{% static 'Lottery/js/rule.js'%}"></script>
+{% endblock %}

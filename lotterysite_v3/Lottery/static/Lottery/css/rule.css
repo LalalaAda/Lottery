@@ -1,0 +1,37 @@
+.mid_1right{
+    background: #F5C457;
+    height: 99%;
+    width: 99%;
+    display: none;
+    margin:5px 5px;
+}
+.mid_2right{
+    background: #F5C457;
+    height: 99%;
+    width: 99%;
+    margin:5px 5px;
+    display: none;
+}
+/*.mid_1right:first-child{
+    display: block;
+}*/
+.right-container{
+    padding: 0px;
+    margin: 0px;
+}
+
+.mid_right_left h2 {
+	color: #ffffff;
+    margin-top: 10px;
+}
+.mid_right_right a {
+	cursor: pointer;
+}
+.mid_right_right {
+    margin-top:15px;
+	float: right;
+}
+.ziti{
+    color:#fff0f0;
+    font-size:18px;
+}

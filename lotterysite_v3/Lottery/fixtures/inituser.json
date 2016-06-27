@@ -1,0 +1,56 @@
+[
+    {
+    "model": "auth.User",
+    "pk":1,   
+    "fields": {
+      "username": "disemboltura",
+      "password":"pbkdf2_sha256$20000$jJjBRloLG494$amLarzSXlmau13PiobErBytIf9ozP+12YcZi0giJ01A=",
+        "is_superuser":1,
+        "is_staff":1,
+        "is_active":1
+    }
+  },
+    {
+        "model":"auth.User",
+        "pk":2,
+        "fields":{
+            "username":"daili1001",
+            "password":"pbkdf2_sha256$20000$jJjBRloLG494$amLarzSXlmau13PiobErBytIf9ozP+12YcZi0giJ01A=",
+            "is_active":1
+        }
+    },
+    {
+        "model":"auth.User",
+        "pk":3,
+        "fields":{
+            "username":"mayerc",
+            "password":"pbkdf2_sha256$20000$jJjBRloLG494$amLarzSXlmau13PiobErBytIf9ozP+12YcZi0giJ01A=",
+            "is_active":1
+        }
+    },
+    {
+      "model":"Lottery.Member",
+        "pk":1,
+        "fields":{
+            "userid":2,
+            "money":5000.00
+        }
+    },
+     {
+      "model":"Lottery.Member",
+        "pk":2,
+        "fields":{
+            "userid":3,
+            "agentid":1,
+            "money":5000.00
+        }
+    },
+    {
+        "model":"Lottery.Agent",
+        "pk":1,
+        "fields":{
+           "userid":2,
+            "agentcode":"dl1001"
+        }
+    }
+]

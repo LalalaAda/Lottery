@@ -1,0 +1,48 @@
+﻿{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <title>代理登录</title>
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        <!-- Bootstrap Core CSS -->
+        <link href="{% static 'Agency/css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+        <!-- Custom CSS -->
+        <link href="{% static 'Agency/css/style.css' %}" rel='stylesheet' type='text/css' />
+        <link href="{% static 'Agency/css/font-awesome.css' %}" rel="stylesheet"> 
+        <!-- jQuery -->
+        <script src="{% static 'Agency/js/jquery.min.js' %}"></script>
+        <!----webfonts--->
+        <link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+        <!---//webfonts--->  
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{% static 'Agency/js/bootstrap.min.js' %}"></script>
+        <style>
+            .logintips {
+                margin-top: 25px;
+            }
+        </style>
+    </head>
+    <body id="login">
+        <div class="login-logo">
+            <a href="index.html"><img src="{% static 'Agency/images/logo.png' %}" alt=""/></a>
+        </div>
+        <h2 class="form-heading">代理商登录</h2>
+        <div class="app-cam">
+            <form action="/for28cqadmin/login/" method="post">
+                {% csrf_token %}
+                <input id="username" name="username" type="text" class="text" value="" placeholder="账号" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                <input id="password" name="password" type="password" placeholder="密码" >
+                <div class="submit"><input type="submit" value="Login"></div>
+            </form>
+            {% if loginInfo.result %}
+            <div class="alert alert-danger logintips text-center" role="alert">{{ loginInfo.message }}</div>
+            {% endif %}
+        </div>
+        
+    </body>
+</html>

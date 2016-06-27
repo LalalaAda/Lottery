@@ -1,0 +1,64 @@
+﻿{% load staticfiles %}
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>代理管理</title>
+        <link href="{% static 'Agency/css/bootstrap.min.css' %}" rel='stylesheet' type='text/css' />
+        <link href="{% static 'Agency/css/style.css' %}" rel='stylesheet' type='text/css' />
+        <link href="{% static 'Agency/css/font-awesome.css' %}" rel="stylesheet">
+<!--        <link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>-->
+        <link href="{% static 'Agency/css/custom.css' %}" rel="stylesheet">
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+        {% block customjsAndcss %} {% endblock %}
+        
+    </head>
+    <body>
+        <div id="wrapper">
+            <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">1111111</span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Modern</a> 
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown"> <a href="">修改密码</a> </li>
+                    <li class="dropdown"> <a href="">账户余额：</a> <span><strong>{{ member.money }}</strong></span> </li>
+                    <li class="dropdown"> <a href="/for28cqadmin/exit">退出</a> </li>
+                </ul>
+                <div class="navbar-default sidebar" role="navigation">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li> <a href="/for28cqadmin/home"><i class="fa fa-dashboard fa-fw nav_icon"></i>工作台</a> </li>
+                            <li> <a href="/for28cqadmin/members"><i class="fa fa-laptop nav_icon"></i>会员管理<span class="fa arrow"></span></a> </li>
+                            <li> <a href="/for28cqadmin/agents"><i class="fa fa-envelope nav_icon"></i>代理管理<span class="fa arrow"></span></a> </li>
+                            <li> <a href="/for28cqadmin/charge"><i class="fa fa-sitemap fa-fw nav_icon"></i>上下分<span class="fa arrow"></span></a>
+                            <li> <a href="/for28cqadmin/gamerecords"><i class="fa fa-indent nav_icon"></i>游戏记录<span class="fa arrow"></span></a> </li>
+                            <li> <a href="/for28cqadmin/reports"><i class="fa fa-flask nav_icon"></i>代理报表</a> </li>
+<!--                            <li> <a href="/for28cqadmin/logs"><i class="fa fa-check-square-o nav_icon"></i>系统日志<span class="fa arrow"></span></a> </li>-->
+<!--                            <li> <a href="#"><i class="fa fa-table nav_icon"></i>客服管理理<span class="fa arrow"></span></a> </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div id="page-wrapper">
+                {% block content %} {% endblock %}
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        <script src="{% static 'Agency/js/jquery.min.js' %}"></script>
+        <script src="{% static 'Agency/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'Agency/js/metisMenu.min.js' %}"></script> 
+        <script src="{% static 'Agency/js/custom.js' %}"></script>
+        {% block bottomjsAndcss %} {% endblock %}
+    </body>
+</html>

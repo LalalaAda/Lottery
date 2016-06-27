@@ -1,0 +1,493 @@
+@charset "utf-8";
+
+.game_menu{margin-top: 1px;display: table;}
+.game_menu_btn{font-size: 1.6em;border-radius: 10px 10px 0 0;margin-right: 15px;margin-bottom: 5px;}
+/*模态框中奖提示等*/
+.modal_game{position: fixed;top: 0;right: 0;bottom: 0;left: 0;z-index: 1050;display: none;overflow: hidden; 
+    -webkit-overflow-scrolling: touch;outline: 0;}
+.modal_game .close{-webkit-appearance: none;padding: 0;cursor: pointer;background: 0 0;border: 0;position: static;}
+.m-game-content{width: 25%;margin: 40%;}
+
+
+/*游戏主体内容*/
+#this_game_box{width: 100%;padding: 2px;overflow: hidden;border-radius: 4px;background-color: #664436;
+    -webkit-box-shadow: #666 0px 0px 10px;
+-moz-box-shadow: #666 0px 0px 10px;
+box-shadow: #666 0px 0px 10px;}
+/*顶部*/
+#top_in_phone{background: #fff;display: none;}
+#top_in_phont p{display: inline;}
+.ip_head_div_left{padding-right: 0px;position: relative;}
+.ip_head_div_left .head_row{margin: 0;background-color: #737f95;color: #ddd;}
+.ip_head_div_left .head_p1{margin: 0;font-size: 1.6em;margin-left: .1em;}
+.tenshow_row{height: 40px;}
+#ip_nowNum{color: #fff;}
+.ip_head_div_left .head_p2{font-size: 1em;position: absolute;right: 0;top: 5px;margin: 0;}
+.ip_head_div_left .head_p3{font-size: 0.75em;margin: 0 0 0 .1em;display: inline;}
+.ip_head_div_left .head_add_p3{margin: 0;display: inline-block;}
+.ip_head_div_left .head_add_sp{background-color: #3E9AFB;padding: .1em;border-radius: 4px;}
+.ip_head_div_left .head_add_sp2{background-color: red;margin-bottom: .1em;border-radius: .3em;margin-right: -1px;}
+.ip_lastone{padding-left: .3em;}
+.ip_tenNum{padding: .1em;border-radius: 4px;background: #3E9AFB;font-size: 1em;color: #fff;}
+.ip_head_div_right{font-size: 1.6em;padding-left: 0;text-align: center;vertical-align: middle;}
+.ip_head_div_right .head_p4{font-size: 1.6em;background: #02c792;color: #fff;margin: 0;padding-top: 10px;padding-bottom: 10px;}
+
+.pc_head_tab{margin: 0px auto;height:80px;width:100%;background-color: #737f95;color: #ddd;}
+.pc_head_tab .head_td_left{width: 30%;}
+.pc_head_tab .head_tf_p1{font-size: 1.4em;margin:0 0 0 20px;padding-bottom: 5px;}
+.pc_head_tab .head_tf_st1{color: #FFF;}
+.pc_head_tab .head_tf_p2{margin: 10px 0 0 5px;display: inline;}
+.pc_head_tab .pcheadtime{font-size: 1.6em;padding: .1em .2em .2em .2em;}
+.pc_head_tab .thispb{margin: 10px 0 0 4px;display: inline;}
+.pc_head_tab .g_box_top_tda{width: 1px;background-color: #474343;}
+.pc_head_tab .g_box_top_tdb{}
+.pc_head_tab .g_box_top_tdc{}
+/*.tdc_p1{margin: 0;font-size: 2.0em;}*/
+/*.g_box_top_tdc strong{color: gold;}*/
+/*.g_box_top_tdc p{font-size: 1em;margin-top: 5px;margin-bottom: 0; color: #fff;}*/
+
+/*.g_box_top_tdc strong{color: gold;}*/
+.g_box_top_tdcp2{margin-left: 65px;}
+.pc_head_tab .gbttdb_p1{font-size: 18px;margin:5px 0 0 0;}
+.gbttdb_p1 strong{}
+.gb_total_sp{background-color: #f0ad4e;display: inline-block;border-radius: 2px;}
+.gb_total_sp01{padding-bottom: 0;}
+.gbttdb_p2_sp{background-color: orangered;padding: .4em;}
+.gbttdn_p1_sp{background-color: red;padding: .4em;margin-bottom: 1px;margin-right: 1px; margin-left: -6px;}
+.pc_official_inquiry{font-size: 12px;margin-left: 5px;color: #ddd;}
+.pc_head_tab .gbttdb_p2{font-size: 14px;margin: 5px 0 0 0;}
+
+.pc_lottery_box_div{width: 100%;height: 274px;overflow: auto;}
+.pc_lottery_box_ta{width:100%;background-color: #eee;}
+.pc_lottery_box_ta .g_in_t{text-align: center;vertical-align: middle;border-right: 1px solid #816253;border-bottom: 1px solid #816253;}
+.kj_box_total_sp{display: inline-block;background-color: #5cb85c;padding: 1px;border-radius: 4px;}
+.kj_box_total_1sp{display: inline-block;background-color: #337ab7;padding: 1px;border-radius: 4px;}
+.pc_lottery_box_ta .p_lo_b_tr{background-color: #ff0;}
+.pc_lottery_box_ta h6{font-weight: bold;}
+.pc_lottery_box_ta .kjboxta_h5a{color: #DF4242;font-weight: bold;}
+.pc_lottery_box_ta .kjboxta_h5b{color: #ff0000;font-weight: bold;display: inline;}
+.pc_lottery_box_ta .kjboxta_h5c{font-weight: bold;display: inline;}
+.pc_lottery_box_ta .kjboxta_btn{border-radius: 4px;font-size: 12px;padding: 0 8px 0 6px;font-weight: bold;}
+.pc_lottery_box_ta .kjboxta_nobtn{border-radius: 4px;font-size: 12px;padding: 0 8px 0 6px;font-weight: bold;margin: 0;color: #4D39DD;}
+.pc_lottery_box_ta .kjboxta_a{font-size: 12px;font-weight: bold;margin: 0;color: #AFAFAD;}
+
+/*最新动态跑马灯*/
+.zxdt_p{margin: 0 0 0 0;font-size: 14px;height: 30px;background: #EFB713;}
+.zxdt_mar{margin-left:1px;font-size: 20px;font-weight: bold;width: 100%;}
+/*聊天室*/
+.chat_div{width: 100%;height:361px;background-color: #737f95;margin:0 0 0 0;position: relative;overflow:auto;}
+.chat_ul{width: 99%; list-style:none;padding: 0;line-height: 21px;margin-bottom: 1px;margin-top: 2px; color: #646464;word-break: break-all;word-wrap: break-word;margin-left: 2px;}
+.chat_li{font-size: 1em;margin-bottom: 5px;margin-left: 2px;}
+.chat_li_div{padding: .3em;margin-bottom: 0;display: inline-block;margin: .1em 0 .1em 0;line-height: initial;background-color: #FFF;border-color: #fff;color: #000000;}
+.chat_sp_name{color: #2b94ff;}
+.chat_sp_name_important{color: crimson;}
+.chat_sp_content{margin-left:.4em;word-break: break-all;word-wrap: break-word;}
+/*聊天输入框*/
+.chat_input{font-size: 1em;margin-top: -1px;border-radius: 0;background-color: #d6e9ca;}
+/*投注操作*/
+.pc_bet{position: relative;width: 100%;height: 310px;background-color: #333333;display: none;color: #ddd;}
+.pc_bet_rowaa{background-color: #737f95;}
+.pcbet_numblan_div{padding-right: 0px;}
+.pc_bet_numAndBlance{margin-left: 10px;}
+.pc_bet_nab_left_p1{padding-left: 2px;display: block;float: left;font-weight: bold;font-size: 12px;margin: 0;}
+.pc_bet_nab_left_p2{float: left;display: inline;color: #d8d12b;font-weight: bold;font-size: 12px;margin: 0;}
+.pc_bet_nab_left_p3{float: left;display: inline;color: #ff0000;font-weight: bold;font-size: 12px;margin: 0;}
+.pcbet_options_div{padding: 0;}
+.pc_bet_options{}
+.pc_bet_options button{background-color: #5cb85c;border: 0;border-radius: 4px;}
+.pc_bet_options_a{line-height: 35px;padding: 4px;color: #ddd;}
+.pc_bet_options_a:link{text-decoration:none;}
+.pc_bet_options_a:visited{text-decoration:none;}
+.pc_bet_options_a:hover{text-decoration:none;}
+.pc_bet_options_a:active{text-decoration:none;}
+.pc_bet_submit_btn{margin-left: 10px;position: absolute;right: 80px;top: 2px;}
+.pc_bet_allcancel_btn{position: absolute;right: 20px;top: 2px;}
+
+.pc_bet_done_p{padding-left: 2px;display: block;float: left;font-weight: bold;font-size: 12px;margin:0;line-height: 35px;position: absolute;left:210px;}
+#pc_Bet_DoneNum{color: gold;font-size: initial;}
+#pc_doBet_Mask_Div{display: none;position: absolute;top: 0%;left: 0%;width: 100%;height: 100%;background-color: rgba(200, 200, 200, 0.6);z-index:1001;}
+#pc_doBet_Show_Div{display: none;position: absolute;top: 25%;left: 22%;width: 50%;height: 50%;border: 5px solid goldenrod;border-radius: 8px;background-color: #fff;z-index:1002;overflow: hidden;}
+.pc_dobet_show_span_close{float: right;margin-top: -5px;cursor: pointer;}
+.pc_dobet_show_p{margin: 10px 0 5px 10px;padding-left: 10px;font-size: 1em;color: #333333;}
+.pc_dobet_selecttype{color: #E62D0E;}
+.pc_dobet_selectodds{color: #A80342;}
+.pc_dobet_input{margin-left: 10px;}
+.pc_dobet_show_btn{margin-left:-18px;line-height: 30px;}
+.pc_dobet_tips_p{margin: 0 0 0 15px;font-size: 12px;color: #ddd;}
+
+.pc_dobet_btn_couma{margin: 0 0 0 20px;}
+.couma_btn1{width: 50px;height: 50px;padding: 0;border-radius: 25px;margin-right:10px;}
+.couma_btn2{width: 50px;height: 50px;padding: 0;border-radius: 25px;margin-right:10px;}
+.couma_btn3{width: 50px;height: 50px;padding: 0;border-radius: 25px;margin-right:10px;}
+.couma_btn4{width: 50px;height: 50px;padding: 0;border-radius: 25px;margin-right:10px;}
+.couma_btn5{width: 50px;height: 50px;padding: 0;border-radius: 25px;margin-right: 10px;}
+
+
+
+#pc_doBet_Options1{position: relative;width: 100%;}
+#pc_doBet_Options2{position: relative;width: 100%;display: none;}
+#pc_doBet_Options3{position: relative;width: 100%;display: none;}
+
+.pdbo_col1{padding-right: 0;}
+.pdbo_col2{padding-left: 0;}
+.pc_dobet_option_odds0{width: 60px;height: 20px;text-align: center;position: absolute;bottom: 2px;right: 0;border-radius: 12px 0 0 0;background-color: #5cb85c;z-index: 10;}
+.pc_dobet_option_money0{width: 60px;height: 20px;text-align: center;position: absolute;top: 2px;right: 0;border-radius: 0 0 0 12px;background-color: #f0ad4e;z-index: 10;color: #fff;}
+
+.pc_dobet_option_odds1{width: 60px;height: 20px;text-align: center;position: absolute;bottom: 2px;right: 15px;border-radius: 12px 0 0 0;background-color: #5cb85c;z-index: 10;}
+.pc_dobet_option_money1{width: 60px;height: 20px;text-align: center;position: absolute;top: 2px;right: 15px;border-radius: 0 0 0 12px;background-color: #f0ad4e;z-index: 10;color: #fff;}
+.pc_dobet_option_btn1{position: relative;overflow: hidden;width:100%;height: 90px; text-align: center;background-color: #333333;border: 1px solid #737f95;}
+.pc_dobet_option1_downdiv{padding-left: 0;padding-right: 0;}
+.pc_dobet_option_odds2{width: 40px;height: 20px;text-align: center;position: absolute;bottom: 2px;right: 0;border-radius: 12px 0 0 0;background-color: #5cb85c;z-index: 10;}
+.pc_dobet_option_money2{width: 40px;height: 20px;text-align: center;position: absolute;top: 2px;right: 0;border-radius: 0 0 0 12px;background-color: #f0ad4e;z-index: 10;color: #fff;}
+.pc_dobet_option_btn2{position: relative;overflow: hidden;width:100%;height: 78px; text-align: center;background-color: #333333;border: 1px solid #737f95;}
+.pc_dobet_option_odds3{width: 40px;height: 20px;text-align: center;position: absolute;bottom: 2px;right: 1px;border-radius: 12px 0 0 0;background-color: #5cb85c;z-index: 10;}
+.pc_dobet_option_money3{width: 40px;height: 20px;text-align: center;position: absolute;top: 2px;right: 1px;border-radius: 0 0 0 12px;background-color: #f0ad4e;z-index: 10;color: #fff;}
+.pc_dobet_option_num28{width: 100%;height: 270px;}
+.pc_dobet_option_num28 .num_td{width: 70px;text-align: center;position: relative;}
+.pc_dobet_option_num28 .tz_num_tips_a{width: 45px;height: 16px;text-align: center;position: absolute;top: 2px;right: 2px;border-radius: 0 0 0 12px;background-color: #f0ad4e;z-index: 10;font-size: 12px;color: #fff;}
+.pc_dobet_option_num28 .tz_num_tips_b{width: 45px;height: 16px;text-align: center;position: absolute;bottom: 2px;right: 2px;border-radius: 12px 0 0 0;background-color: #5cb85c;z-index: 10;font-size: 12px;}
+.pc_dobet_option_num28 .g_btn_num{position: relative;overflow: hidden;width: 98%;height: 67px;background-color: #333333;border: 1px solid #737f95;}
+
+.pc_dobet_option_btn3{width: 90%;height: 250px;background-color: #333333;border: 1px solid #737f95;text-align: center;float:left;margin:10px 0 0 20px;position: relative;}
+.pc_dobet_option_btn4{width: 90%;height: 250px;background-color: #333333;border: 1px solid #737f95;text-align: center;float:right;margin:10px 20px 0 0;position: relative;}
+.pc_dobet_option_money4{width: 60px;height: 20px;text-align: center;position: absolute;top: 0;right: 0;border-radius: 0 0 0 12px;background-color: #f0ad4e;z-index: 10;color: #fff;}
+.pc_dobet_option_odds4{width: 60px;height: 20px;text-align: center;position: absolute;bottom: 0;right: 0;border-radius: 12px 0 0 0;background-color: #5cb85c;z-index: 10;}
+/*===========*/
+/*====中右手机端下部修改*/
+
+.ready-go{
+	display: none;
+    /*color: #ddd;*/
+}
+/*客户余额投注信息*/
+.yuer li{
+    float: left;
+    list-style: none;
+    color: #d8d12b;
+}
+.yingli li{
+    float: left;
+    list-style: none;
+    color: #f00;
+}
+.yixiazhu li{
+    float:left;
+    list-style: none;
+   
+}
+.xiazhuTips{
+    color: #ddd;
+    background-color: #737f95;
+}
+
+.anniu{
+    background-color: #737f95;
+}
+/*按钮选项*/
+.anniu-btn{
+    margin-left:15px;
+}
+.xuanze01,.xuanze02,.xuanze03,.xuanze04,.xuanze05{
+    margin-left: 5px;
+    padding: 10px 11px;
+    text-align: center;
+    border-radius: 5px;
+    font-size:12px;
+    float: left;
+    margin-top: -10px;
+}
+.xuanze01{
+    background: #02c893 
+      
+}
+.xuanze02{
+    background: #02c893;
+   
+}
+.xuanze03{
+    background: #02c893;
+   
+}
+.xuanze04{
+    background: #5AC1E0;
+    margin-left:55px;
+}
+.xuanze05{
+    background: #339999;
+}
+
+/*组合的样式*/
+.zuhe{
+    height: 260px;
+     background-color: #333333;
+     text-align: center;
+     font-weight:100;
+     display:block;
+}
+.zuhe01,.zuhe02{
+    height: 130px;
+    
+    text-align: center;
+}
+.zuhe ul{
+    margin: 0px;
+    padding: 0px;
+}
+.zuhe ul li{
+    list-style: none;
+    float: left;
+    
+}
+.zuhe01 li,.zuhe02 li{
+    width:23.5%;
+    height: 50%;
+    margin-left:1%; 
+    
+}
+.zhuname{
+    width: 100%;
+    height: 70%;
+    
+    border-radius: 60%;
+    border: solid 5px #808080;
+    line-height: 80px;
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+}
+.peilv{
+    width: 35%;
+    height: 20%;
+    border-radius: 10px;
+    float: left;
+    margin-top:5px;
+    background: #339999;
+    line-height:30px;
+}
+.yazhu{
+    width: 55%;
+    height: 20%;
+    border-radius: 10px;
+    margin-top:5px;
+    line-height:30px;
+    float: right;
+    background:#669966;
+}
+
+.tema{
+    background-color: #333333;
+}
+/*特码的样式*/
+.tema1,.tema2,.tema3,.tema4{
+    height: 260px;
+
+    text-align: center;
+    font-weight:100;
+    display: none;
+}
+.tema1 ul,.tema2 ul,.tema3 ul,.tema4 ul{
+    margin: 0px;
+    padding: 0px;
+}
+.tema1 ul li,.tema2 ul li,.tema3 ul li,.tema4 ul li{
+    list-style: none;
+    width: 23.5%;
+    height: 50%;
+    /*background: #ff011f;*/
+    float: left;
+    margin-left:1% ;
+    margin-bottom: 0px;
+}
+.temashu{
+    width: 100%;
+    height: 70%;
+    
+    border-radius:50%;
+    border:5px solid #808080;
+    line-height:80px;
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+}
+.temapei{
+    width:35%;
+    height:25%;
+    background: #339999;
+    border-radius: 10px;
+    float: left;
+    margin-top:5px;
+    line-height: 30px; 
+}
+.temazhu{
+    width:55%;
+    height: 25%;
+    background: #669966;
+    border-radius: 10px;
+    float:right;
+    margin-top:5px;
+    line-height: 30px;  
+}
+.page1,.page2,.page3,.page4{
+    width:100%;
+    height:25%;
+    border-radius: 20%;
+    border: solid 3px #2F4F4F;
+    line-height: 30px;
+    background: #00CED1;
+    margin-top:6%;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/*极值样式*/
+.jizhi{
+    width: 100%;
+    height:260px;
+    background-color: #333333;
+    display: none;
+}
+.jizhi ul{
+    padding: 0px;
+    margin: 0px;
+}
+.jizhi ul li{
+    list-style: none;
+    width:47%;
+    height:260px;
+    float:left;
+    margin-left:2%;
+    text-align: center;
+}
+.jizhiname{
+    width: 100%;
+    height: 70%;
+    font-size: 24px;
+    text-align: center;
+    color: #Ddd;
+    border:5px solid #808080;
+    border-radius: 50%;
+    
+    line-height: 180px;
+    cursor: pointer;
+}
+.jizhipei{
+    width:30%;
+    height:25%;
+    background: #339999;
+    border-radius: 20px;
+    float: left;
+    margin-top:10px;
+    line-height: 50px; 
+}
+.jizhizhu{
+    width:55%;
+    height: 25%;
+    background: #669966;
+    border-radius: 20px;
+    float:right;
+    margin-top:10px;
+    line-height: 50px;  
+}
+/*提示弹框*/
+.Tipstan{
+    position: absolute;
+    z-index: 1000;
+    display: block;
+    margin-top:-50%;
+    display: none;
+}
+.Tipstan-ul{
+    position: absolute;
+    border-radius:20px;
+    border: 5px #DBA520 solid;
+    width: 250px;
+    z-index: 1001;
+    background: #FFFFFF;
+    opacity:1;
+}
+.Tipstan-ul li{
+    list-style: none;
+    margin-top:0px ;
+}
+#yesbtn{
+    background: #5AC1E0;
+    border-radius:5px;
+    border:1px ouset #00CED1;
+    padding:10px;
+    margin: 5px 10px;
+}
+#nobtn{
+    background:#D9534F;
+    border-radius:5px;
+    border:1px ouset #00CED1;
+    padding:10px;
+    margin: 5px 20px;
+}
+#Tipstans{
+    color:#E04233;
+    font-size: 15px;
+}
+#Tipstant{
+    color:#E04233;
+}
+#Tipstanz{
+    color:#fff;
+    
+}
+#youzhushu{
+    color:#000;
+}
+/*=====================================*/
+@media (max-width: 768px) {
+    body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .col-for-cellphone {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #game_Menu{display: none;}
+    #top_in_pc{display: none;}
+    #top_in_phone{display: block;}
+    #pc_lottery_box{display: none;}
+    #zxdt{display: none;}
+    #chatroom{height: 180px;}
+    #pc_Bet{display: none;}
+    #alltouzhu{display: block;}
+    .chat_div{overflow-x: hidden;overflow-y: scroll;}
+    .chat_li{font-size: 0.75em;margin-bottom: 0px;}
+    .chat_li_div{padding: .1em;margin: 0;}
+    .zuhe01{height: 100px; margin-top:5px;}
+    .zuhe02{margin-top: 0px;}
+    .zhuname{line-height: 50px;}
+    .zuhe{height: 230px;}
+    .temashu{line-height: 50px;}
+    .tema1, .tema2, .tema3, .tema4 {height:230px;}
+    .page1, .page2, .page3, .page4 {line-height: 23px;}
+    .jizhi{height: 230px;margin-top:5px;}
+    .jizhi ul li{    height:195px; margin-top: 5px;}
+    .jizhiname{    line-height: 125px;}
+    #this_game_box{
+        background: #333333;
+    }
+  
+    .tema0-3 ul,.tema7-10 ul,.tema14-17 ul,.tema21-24 ul{
+        margin-top:5px;
+    }
+    .tema4-6 ul li,.tema11-13 ul li,.tema18-20 ul li,.tema25-27 ul li{
+        margin-top:5px;
+    }
+}
+@media (max-width:320px) {
+    .xuanze04{
+    background: #5AC1E0;
+    margin-left:15px;
+    }
+     #menu{
+        width:60%;
+    }
+    #userstatus{
+        width:40%;
+    }
+}

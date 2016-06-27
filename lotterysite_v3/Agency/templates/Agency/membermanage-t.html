@@ -1,0 +1,181 @@
+{% extends 'Agency/base.html' %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% block content %}
+    <div class="graphs">
+        <div class="xs">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <ul id="tianjiahuiyuan">
+                        <li><img src="{% static 'Agency/images/t01.png' %}" width="24" height="24" alt=""/>
+                            <input name="" type="button"  value="添加会员" onclick="show1()">
+                        </li>
+                        <li>
+                            <select>
+                                <option value="1">下级代理ID</option>
+                                <option value="2">下级代理帐号</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="text" class="tianjia">
+                        </li>
+                        <li>
+                            <select>
+                                <option value="1">帐号ID</option>
+                                <option value="2">玩家帐号</option>
+                            </select>
+                        </li>
+                        <li>
+                            <input type="text" class="tianjia">
+                        </li>
+                        <li>
+                            <select>
+                                <option value="0">--帐号状态--</option>
+                                <option value="1">可用</option>
+                                <option value="2">冻结</option>
+                            </select>
+                        </li>
+                        <li>统计
+                            <input type="checkbox">
+                        </li>
+                        <li>
+                            <input type="submit" value="查询">
+                        </li>
+                  </ul>
+                </div>
+                <div class="modal fade" id="adduserAndmember" tabindex="1" role="dialog" aria-labelledby="adduserAndmember">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4>添加会员</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" id="addusermember-form" role="form">
+                                    <div class="form-group">
+                                        <label for="aum-username" class="col-sm-2 control-label">用户名</label>
+                                        <div class="col-sm-9">
+                                            <input  type="text" class="form-control1" id="aum-username" maxlength="30">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="aum-password" class="col-sm-2 control-label">密码</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control1" id="aum-password" maxlength="30">
+                                        </div>
+                                    </div>
+                                    <div class="alert hide addmember-tips" role="alert">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col-sm-11 text-center">
+                                    <button type="button" class="btn btn-default btn-lg addmember-btn">添加</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="huiyuanbiao" >
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <table class="table table-striped table-responsive table-hover" border="0"  >
+                            <caption>
+                            单位：金币
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>玩家帐号</th>
+                                    <th>玩家ID</th>
+                                    <th>总上分</th>
+                                    <th>总下分</th>
+                                    <th>差值</th>
+                                    <th>总输赢</th>
+                                    <th>账户余额</th>
+                                    <th>所属代理</th>
+                                    <th>帐号状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in ulist %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ item.userid.username }}</td>
+                                    <td>{{ item.userid.id }}</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>{{ item.money | intcomma }}</td>
+                                    <td>{{ item.agentid.userid.username }}</td>
+                                    <td>{% if item.userid.is_active %}正常 {%else%}冻结{% endif %}</td>
+                                    <td><select id="{{item.userid.username}}">
+                                          <option value="1">可用</option>
+                                          <option value="2">冻结</option>
+                                        </select>
+                                        <button type="button" class="btn btn-primary btn-sm btn-alertmem" id="user-{{item.userid.username}}">修改</button></td>
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+                            
+                        </table>
+                    </div>
+<!--
+                    <div id="huiyuanfenye">
+                        <div>共
+                            <span>XX</span>页. 当前第
+                            <span>XXX</span>页.
+                        </div>
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-modifymember" tabindex="1" role="dialog" aria-labelledby="modifymember">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">会员状态修改</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="stauts" id="status-freeze" value="option2">冻结
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="stauts" id="status-live" value="option3">正常
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-mem-status-save">保存</button>
+                    <button type="button" class="btn btn-default btn-mem-status-close" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block bottomjsAndcss %}
+    <script src="{% static 'Agency/js/ajaxfordjango.js' %}"></script>
+    <script src="{% static 'Agency/js/memberAndagent.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,286 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0,user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>{{ title }}</title>
+        <link href="{% static 'Lottery/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'Lottery/css/base.css' %}" rel="stylesheet">
+        <link href="{% static 'Lottery/css/ui2.css' %}" rel="stylesheet" >
+       <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+         <![endif]-->
+    </head>
+       {% block customsytle %} {% endblock %}
+ <body>
+        <div id="header">
+            <div id="menu" class="pcnone">
+                <ul>
+                    <li  id="menuname">
+                        <a>菜单</a>
+                        <ul>
+                            <li  id="loginouT"><a>退出</a></li>
+                            <li  id="xiazhujiLU"><a href="/bethistory/" target="_blank">下注记录</a></li>
+                            <li  id="loginto"><a>登录&nbsp||&nbsp注册</a></li>                  
+                        </ul>
+                    </li>
+                    <li id="gameid1"><a>快乐28</a></li>
+                    <li id=gameid2><a>加拿大28</a></li>
+					<li id="refresh28"><a>刷新</a></li>
+                </ul>
+            </div>
+            <div id="userstatus" >
+                <div id="login2" >
+                    <ul>
+                         <li id="UeserID_box" >
+                            <span id="UeserID_name">ID：</span>
+                            <span id="UeserID_int"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container main-container">
+            <div class="row main-row">
+                <div class="col-md-3 col-sm-3 col-xs-0 left-container"> 
+                    <!-- LOGO -->
+                    <div class="row logo-row">
+                        <div class="col-md-12 logo-container" id="logo"  >
+                           <div id="logotu">
+                             <a href="http://www.28cq.com" ><img src="{% static 'Lottery/image/logo.png' %}"/></a>
+                              
+                           </div>
+                        </div>
+                    </div>
+                    <!-- LOGO end--> 
+                    
+                    <!-- login -->
+                    <div class="row login-row"> {% if user.is_authenticated %}
+                        <div class="col-md-12 col-sm-12 logined_container"  style="background-image:url({% static 'Lottery/image/55.jpg)' %}" id="denglukuang">
+                            <ul>
+                                <li><span id="dengluzi"> 欢 迎 你：</span> <span id="usercolor">{{ user.username }}</span>
+                                    <span id="userid">ID: <span id="base_userid_sp">  <!-- ID.... -->   </span></span>
+                                   </li>
+                                <li><span id="dengluzi"> 账户余额：</span> <span>{{ member.money }}</span></li>
+                                <li>&nbsp;&nbsp;<span id="zhanji">今日盈亏：<span id="base_zhanji_sp"> <!--.....钱-->    </span></span><br>
+                                    &nbsp;&nbsp;<span id="qishu">参与期数：<span id="base_qishu_sp"> <!--.....期-->    </span></span>
+                                                <span id="xiazhujilu"> <a href="/bethistory/" target="view_window">[ 下注记录 ]</a></span>
+                                   </li>
+                                <li> <input type="image" name="imageField" id="imageField" src="{% static 'Lottery/image/cgzl.png' %}" onclick="show();"/>
+                                    <input id="btn-logout" type="image" src="{% static 'Lottery/image/tc.png' %}"/>
+                                </li>
+                             </ul>
+                       </div>
+                          {% else %} 
+                       <div class="col-md-12 col-sm-12 login-container" id="dengluform1">
+                            <form class="form-horizontal" id="dengluform" role="form">
+                                {% csrf_token %}
+                                <ul>
+                                    <li>
+                                        <h3> 欢迎登录</h3>
+                                    </li>
+                                    <li>
+                                        <input type="text" class="form-control" id="inputusername" placeholder="用户名" maxLength="20">
+                                    </li>
+                                
+                                    <li>
+                                        <input type="password" class="form-control" id="inputpassword" placeholder="密码" maxLength="18">
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" >
+                                        <span id="jizhupw">记住密码</span> </li>
+                                    <br>
+                                    <li>
+                                        <button type="button" class="btn btn-default btn-lg btn-login" id="denglu">登陆</button>
+                                    </li>
+                                    <br>
+                                    <li>
+                                        <button type="button" class="btn btn-default btn-lg btn-register text-center" data-toggle="modal" data-target="#registermodal" id="zhuce">免费                                          注册</button>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                        {% endif %} </div>
+                    <!-- login end --> 
+                    
+                    <!-- trust logo -->
+                    <div class="row trust-row"> <img src="{% static 'Lottery/image/xy28_rightwzb.gif' %}" class="img-responsive"> </div>
+                    <!-- strust logo end--> 
+                    
+                    <!-- online support -->
+                    <div class="row olsupport-row">
+                        <div class="col-sm-12" id="zaixiankehu">
+                            <button type="button" class="btn btn-warning btn-lg btn-olsupport">点击在线客户咨询</button>
+                        </div>
+                    </div>
+                    <!-- online support end --> 
+                    <!-- 公告 -->
+                    <div class="row olsupport-row" >
+                         <div id="gonggao"> 
+                             <a href="#" class="list-group-item active">系统公告</a>
+                             {% for news in newslist %}
+                              <a href="/news/{{news.newsid}}" target="view_window" class="list-group-item">{{ news.title }}</a>
+                             {% endfor %}
+                         </div>
+                      </div>
+                    <!-- 公告 end--> 
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12 col-for-cellphone"> {% block game %}    {% endblock %} </div>
+            </div>
+        </div>
+        <!--底部start3.26   15：50-->
+        <div class="container body-footer">
+            <div class="row footer-row">
+                <div class="col-md-3 footer-left">
+                    <div class="row left-row ">
+                        <div class="col-md-6 col-sm-6 col-xs-6 footer-left-left">
+                            <h5 >新手上路</h5>
+                            <ul>
+                                <li><a href="/testrule/?round=0">如何注册</a></li>
+                                <li><a href="/testrule/?round=1">如何登陆</a></li>
+                                <li><a href="/testrule/?round=2">如何充值</a></li>
+                                <li><a href="/testrule/?round=3">如何兑现</a></li>
+                                <li><a href="/testrule/?round=4">如何转账</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 footer-left-right">
+                            <h5>帮助中心</h5>
+                            <ul>
+                                <li><a href="/testrule/?round=5">游戏规则</a></li>
+                                <li><a href="/testrule/?round=6">倍数说明</a></li>
+                                <li><a href="/testrule/?round=7">押注方法</a></li>
+                                <li><a href="/testrule/?round=8">分值比例</a></li>
+                                <li><a href="/testrule/?round=9">会员代理</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8  footer-right footer-right-change">
+                    <div class="row right-row1">
+                        <div class="col-md-12 footer-right-top">
+                            <h4>游戏流程图</h4>
+                        </div>
+                    </div>
+                    <div class="row right-row2">
+                        <div class=" col-md-12 footer-right-content">
+                            <ul >
+                                <li class="content-title">免费注册</li>
+                                <li><img src="{% static 'Lottery/image/lc02.png' %}"></li>
+                                <li class="content-title">登录游戏</li>
+                                <li ><img src="{% static 'Lottery/image/lc02.png' %}"></li>
+                                <li class="content-title" >充值上分</li>
+                                <li><img src="{% static 'Lottery/image/lc02.png' %}"></li>
+                                <li class="content-title">开始游戏</li>
+                                <li><img src="{% static 'Lottery/image/lc02.png' %}"></li>
+                                <li class="content-title">兑换下分</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row right-row3">
+                        <div class="col-md-12 footer-right-bottom">
+                            <div class="row bottom-row">
+                                <ul>
+                                    <li class="col-md-2"><img src="{% static 'Lottery/image/a_r3_c2.jpg' %}" width="127px" height="47px"></li>
+                                    <li class="col-md-2"><img src="{% static 'Lottery/image/a_r2_c10.jpg' %}" width="127px" height="47px"></li>
+                                    <li class="col-md-2"><img src="{% static 'Lottery/image/a_r2_c6.jpg' %}" width="127px" height="47px"></li>
+                                    <li class="col-md-2"><img src="{% static 'Lottery/image/a_r2_c8.jpg' %}" width="127px" height="47px"></li>
+                                    <li class="col-md-2"><img src="{% static 'Lottery/image/a_r2_c4.jpg' %}" width="127px" height="47px"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--底部end 3.26   15：50--> 
+        
+        <!-- 注册 -->
+        <div class="modal in" id="registermodal" > <a class="close" data-dismiss="modal" id="guanbi">×</a>
+            <h1>注册</h1>
+            <form class="form-horizontal" id="register-form" role="form" method="post" action="/register/">
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="reg-username" name="username" maxLength="20" placeholder="用户名" onkeyup="checkuser1()">
+                        <br>
+                        <span id="userTips"></span> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="reg-password" name="password" maxLength="18" placeholder="密码" onkeyup="checkpwd()">
+                        <br>
+                        <span id="pwdTips"></span> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="reg-agent" name="dailishang" placeholder="推荐人" onkeyup="checkdl()">
+                        <br>
+                        <span id="dlTips"></span> </div>
+                </div>
+                <button type="button" class="btn btn-default btn-lg register-btn button-blue" id="zhucekuan">注册</button>
+                <br><br>
+                <a href="#" class="reg-to-login" data-toggle="modal" data-target="#loginmodal"><span style=" font-size:12px;">已有账号？立即登陆</span></a>
+            </form>
+        </div>
+        <!-- 注册 end--> 
+        
+        <!--登录 -->
+        <div class="modal in" id="loginmodal" role="dialog" aria-labeledby="loginModallabel"> <a class="close" data-dismiss="modal" id="guanbi">×</a>
+            <h1>登录</h1>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;使用已有帐号登陆：</p>
+            <div class="modal-body">
+                <form class="form-horizontal" action="" medhod="get" onsubmit="return myFunction()">
+                    <p>
+                        <input type="text" class="form-control" id="login-username" placeholder="用户名">
+                    </p>
+                    <p>
+                        <input type="password" class="form-control" id="login-password" placeholder="密码">
+                    </p>
+                    <p><span id="mimatishi"></span> </p>
+                    <p>
+                        <input type="checkbox" >
+                        记住密码 </p>
+                       <a href="#" class="reg-to-login" data-toggle="modal" data-target="#registermodal" ><span style=" font-size:12px;">没有账号？点击注册</span></a>
+                    <button type="button" class="btn btn-default btn-lg login-btn button-blue" id="denglukuan">登录</button>
+                </form>
+            </div>
+        </div>
+        <!--登录 end --> 
+        <!-- modify information -->
+        <div id="bg" style="position:absolute;z-index:2;display:none;top:0px;left:0px;">
+            <div id="bg_div1">
+                <div style="width:100%;height:30px;text-align:right;"> <span onclick="dealData();"> <a href="" style="text-decoration: none;">X</a> </span> </div>
+                <form>
+                    <table id="gaimima">
+                        <tbody>
+                            <tr>
+                                <td width="102">当前密码</td>
+                                <td width="200"><input type="password" name="password" id="password"></td>
+                            </tr>
+                            <tr>
+                                <td>新 密 码</td>
+                                <td><input type="password" name="password2" id="password2"></td>
+                            </tr>
+                            <tr>
+                                <td height="56">确认密码</td>
+                                <td><input type="password" name="password3" id="password3"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="submit" name="submit" id="xiugai" value="确认修改"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+	<script src="{% static 'Lottery/js/jquery-1.12.2.min.js' %}"></script> 
+    <script src="{% static 'Lottery/js/bootstrap.min.js' %}"></script> 
+    <script src="{% static 'Lottery/js/base.js'%}"></script> 
+    {% block customscript %}    {% endblock %}
+</body>
+</html>
